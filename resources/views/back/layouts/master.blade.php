@@ -5,21 +5,40 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/feather-icons@4.28.0/dist/feather.min.css" rel="stylesheet">
     <title>Your Admin Panel</title>
+    <style>
+        /* Add custom styles here if needed */
+    </style>
 </head>
 
 <body class="bg-gray-100">
 
     <div class="flex h-screen">
         <!-- Sidebar -->
-        <div class="bg-blue-500 text-white w-48 p-4">
+        <div class="bg-gray-800 text-white w-48 p-4">
             <!-- Sidebar content goes here -->
             <p class="text-lg font-semibold mb-4">Admin Panel</p>
             <ul class="space-y-2">
-                <!-- Sidebar items -->
-                <li><a href="{{ route('dashboard') }}" class="block">Dashboard</a></li>
-                <li><a href="{{ route('blogs') }}" class="block">Blog</a></li>
-                <li><a href="#" class="block">Category</a></li>
+                <!-- Sidebar items with icons -->
+                <li>
+                    <a href="{{ route('dashboard') }}" class="block flex items-center">
+                        <span data-feather="home" class="mr-2"></span>
+                        Dashboard
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ route('blogs') }}" class="block flex items-center">
+                        <span data-feather="file-text" class="mr-2"></span>
+                        Blog
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="block flex items-center">
+                        <span data-feather="list" class="mr-2"></span>
+                        Category
+                    </a>
+                </li>
             </ul>
         </div>
 
@@ -66,7 +85,11 @@
         </div>
     </div>
 
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons@4.28.0/dist/feather.min.js"></script>
     <script>
+        // Initialize Feather icons
+        feather.replace();
+
         // JavaScript to handle the profile dropdown
         document.getElementById('user-menu-button').addEventListener('click', function () {
             var dropdown = document.getElementById('user-menu-button').nextElementSibling;

@@ -30,6 +30,83 @@
         
         
     </div>
+    <div class="container mx-auto flex w-3/4 py-8">
+
+<!-- Left Column - Project Showcase -->
+<div class=" w-1/2">
+
+    <!-- Column 1 - Project Showcase -->
+    <div class="w-1/2 p-4">
+        <h2 class="text-3xl font-bold mb-4">Project Showcase</h2><hr>
+
+        <!-- Project 1 -->
+        <div class="mb-8">
+            <h3 class="text-xl font-bold mb-2">Project Title 1</h3>
+            <p class="text-gray-600 mb-4">Description of Project 1. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+            <button class="bg-blue-500 text-white py-2 px-4 rounded">Learn More</button>
+        </div>
+
+        <!-- Add more projects as needed -->
+
+    </div>
+
+    <!-- Column 2 - Project Showcase -->
+    <div class="w-1/2 p-4">
+        <!-- Project 2 -->
+        <div class="mb-8">
+            <h3 class="text-xl font-bold mb-2">Project Title 2</h3>
+            <p class="text-gray-600 mb-4">Description of Project 2. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+            <button class="bg-blue-500 text-white py-2 px-4 rounded">Learn More</button>
+        </div>
+
+        <!-- Add more projects as needed -->
+
+    </div>
+
+</div>
+
+<!-- Right Column - Skills -->
+<div class="w-1/2 p-4">
+    <h2 class="text-3xl font-bold mb-4">Skills</h2><hr>
+
+    <!-- Skill 1 - HTML5 -->
+    <div class="mb-4">
+        <p class="text-lg font-semibold mb-2">HTML5</p>
+        <div class="flex items-center">
+            <div class="bg-gray-200 h-4 w-3/4 rounded">
+                <div class="bg-blue-500 h-full rounded"></div>
+            </div>
+            <span class="ml-2">75%</span>
+        </div>
+    </div>
+
+    <!-- Skill 2 - CSS3 -->
+    <div class="mb-4">
+        <p class="text-lg font-semibold mb-2">CSS3</p>
+        <div class="flex items-center">
+            <div class="bg-gray-200 h-4 w-2/4 rounded">
+                <div class="bg-green-500 h-full rounded"></div>
+            </div>
+            <span class="ml-2">50%</span>
+        </div>
+    </div>
+
+    <!-- Skill 3 - JavaScript -->
+    <div class="mb-4">
+        <p class="text-lg font-semibold mb-2">JavaScript</p>
+        <div class="flex items-center">
+            <div class="bg-gray-200 h-4 w-1/4 rounded">
+                <div class="bg-yellow-500 h-full rounded"></div>
+            </div>
+            <span class="ml-2">25%</span>
+        </div>
+    </div>
+
+    <!-- Add more skills as needed -->
+
+</div>
+
+</div>
     <section class="items-center py-16 bg-gray-100 font-poppins dark:bg-gray-800">
         <div class="justify-center max-w-6xl px-4 py-4 mx-auto lg:py-8 md:px-6">
             <div class="max-w-xl mx-auto">
@@ -227,83 +304,7 @@
             </div>
         </div>
     </section>
-    <div class="container mx-auto flex w-3/4 py-8">
 
-    <!-- Left Column - Project Showcase -->
-    <div class="flex w-1/2 bg-gray-100">
-
-        <!-- Column 1 - Project Showcase -->
-        <div class="w-1/2 p-4">
-            <h2 class="text-3xl font-bold mb-4">Project Showcase</h2><hr>
-
-            <!-- Project 1 -->
-            <div class="mb-8">
-                <h3 class="text-xl font-bold mb-2">Project Title 1</h3>
-                <p class="text-gray-600 mb-4">Description of Project 1. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                <button class="bg-blue-500 text-white py-2 px-4 rounded">Learn More</button>
-            </div>
-
-            <!-- Add more projects as needed -->
-
-        </div>
-
-        <!-- Column 2 - Project Showcase -->
-        <div class="w-1/2 p-4">
-            <!-- Project 2 -->
-            <div class="mb-8">
-                <h3 class="text-xl font-bold mb-2">Project Title 2</h3>
-                <p class="text-gray-600 mb-4">Description of Project 2. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                <button class="bg-blue-500 text-white py-2 px-4 rounded">Learn More</button>
-            </div>
-
-            <!-- Add more projects as needed -->
-
-        </div>
-
-    </div>
-
-    <!-- Right Column - Skills -->
-    <div class="w-1/2 p-4">
-        <h2 class="text-3xl font-bold mb-4">Skills</h2><hr>
-
-        <!-- Skill 1 - HTML5 -->
-        <div class="mb-4">
-            <p class="text-lg font-semibold mb-2">HTML5</p>
-            <div class="flex items-center">
-                <div class="bg-gray-200 h-4 w-3/4 rounded">
-                    <div class="bg-blue-500 h-full rounded"></div>
-                </div>
-                <span class="ml-2">75%</span>
-            </div>
-        </div>
-
-        <!-- Skill 2 - CSS3 -->
-        <div class="mb-4">
-            <p class="text-lg font-semibold mb-2">CSS3</p>
-            <div class="flex items-center">
-                <div class="bg-gray-200 h-4 w-2/4 rounded">
-                    <div class="bg-green-500 h-full rounded"></div>
-                </div>
-                <span class="ml-2">50%</span>
-            </div>
-        </div>
-
-        <!-- Skill 3 - JavaScript -->
-        <div class="mb-4">
-            <p class="text-lg font-semibold mb-2">JavaScript</p>
-            <div class="flex items-center">
-                <div class="bg-gray-200 h-4 w-1/4 rounded">
-                    <div class="bg-yellow-500 h-full rounded"></div>
-                </div>
-                <span class="ml-2">25%</span>
-            </div>
-        </div>
-
-        <!-- Add more skills as needed -->
-
-    </div>
-
-</div>
 
 
 
