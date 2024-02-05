@@ -5,10 +5,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/feather-icons@4.28.0/dist/feather.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
     <title>Your Admin Panel</title>
     <style>
         /* Add custom styles here if needed */
+        .sidebar-item:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
     </style>
 </head>
 
@@ -18,24 +21,24 @@
         <!-- Sidebar -->
         <div class="bg-gray-800 text-white w-48 p-4">
             <!-- Sidebar content goes here -->
-            <p class="text-lg font-semibold mb-4">Admin Panel</p>
+            <p class="text-xl bg-gray-700 p-4 font-semibold mb-4">Admin Panel</p>
             <ul class="space-y-2">
-                <!-- Sidebar items with icons -->
+                <!-- Sidebar items with Font Awesome icons -->
                 <li>
-                    <a href="{{ route('dashboard') }}" class="block flex items-center">
-                        <span data-feather="home" class="mr-2"></span>
+                    <a href="{{ route('dashboard') }}" class="block flex items-center sidebar-item p-2">
+                        <i class="fas fa-home text-sm mr-2"></i>
                         Dashboard
                     </a>
                 </li>
                 <li>
-                    <a href="{{ route('blogs') }}" class="block flex items-center">
-                        <span data-feather="file-text" class="mr-2"></span>
+                    <a href="{{ route('blogs') }}" class="block flex items-center sidebar-item p-2">
+                        <i class="fas fa-file-alt text-sm mr-2"></i>
                         Blog
                     </a>
                 </li>
                 <li>
-                    <a href="#" class="block flex items-center">
-                        <span data-feather="list" class="mr-2"></span>
+                    <a href="#" class="block flex items-center sidebar-item p-2">
+                        <i class="fas fa-list text-sm mr-2"></i>
                         Category
                     </a>
                 </li>
@@ -85,11 +88,7 @@
         </div>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/feather-icons@4.28.0/dist/feather.min.js"></script>
     <script>
-        // Initialize Feather icons
-        feather.replace();
-
         // JavaScript to handle the profile dropdown
         document.getElementById('user-menu-button').addEventListener('click', function () {
             var dropdown = document.getElementById('user-menu-button').nextElementSibling;
