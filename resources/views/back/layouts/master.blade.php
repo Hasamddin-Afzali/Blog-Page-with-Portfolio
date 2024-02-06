@@ -18,7 +18,7 @@
 
 <body class="bg-gray-100">
 
-    <div class="flex h-screen">
+    <div class="flex">
         <!-- Sidebar -->
         <div class="bg-gray-800 text-white w-48 p-4">
             <!-- Sidebar content goes here -->
@@ -38,9 +38,24 @@
                     </a>
                 </li>
                 <li>
-                    <a href="#" class="block flex items-center sidebar-item p-2">
-                        <i class="fas fa-list text-sm mr-2"></i>
-                        Category
+                    <a href="{{ route('categories') }}" class="block flex items-center sidebar-item p-2">
+                        <i class="fas fa-tags text-sm mr-2"></i> <!-- This is a Font Awesome icon for "tags" -->
+                        Categories
+                    </a>
+
+                </li>
+                <li>
+                    <a href="{{ route('projects') }}" class="block flex items-center sidebar-item p-2">
+                        <i class="fas fa-project-diagram text-sm mr-2"></i>
+                        <!-- This is the Font Awesome icon for "project" -->
+                        Projects
+                    </a>
+
+                </li>
+                <li>
+                    <a href="{{ route('allUsers') }}" class="block flex items-center sidebar-item p-2">
+                        <i class="fas fa-users text-sm mr-2"></i>
+                        Users
                     </a>
                 </li>
             </ul>
@@ -66,16 +81,14 @@
                         </button>
 
                         <!-- Dropdown content -->
-                        <div
-                            class="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none hidden"
+                        <div class="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none hidden"
                             role="menu" aria-orientation="vertical" aria-labelledby="user-menu-button" tabindex="-1">
                             <!-- Dropdown items go here -->
-                            <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                                role="menuitem" tabindex="-1" id="user-menu-item1">Profile</a>
-                            <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                                role="menuitem" tabindex="-1" id="user-menu-item2">Settings</a>
-                            <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                                role="menuitem" tabindex="-1" id="user-menu-item3">Logout</a>
+                            <a href="{{ route('profile') }}"
+                                class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem"
+                                tabindex="-1" id="user-menu-item1">Profile</a>
+                            <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem"
+                                tabindex="-1" id="user-menu-item3">Logout</a>
                         </div>
                     </div>
                 </div>
@@ -102,7 +115,7 @@
             if (!event.target.closest('.relative')) {
                 dropdown.classList.add('hidden');
             }
-        });
+     );
     </script>
 
 </body>

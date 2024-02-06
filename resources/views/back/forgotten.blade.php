@@ -23,7 +23,7 @@
 <body class="h-screen flex items-center justify-center">
 
     <div class="bg-white p-8 rounded shadow-md w-full max-w-md">
-        <h1 class="text-2xl font-bold mb-6 text-center text-gray-800">Admin Login Page</h1>
+        <h1 class="text-2xl font-bold mb-6 text-center text-gray-800">Forgot Password</h1>
 
         <!-- Email Input -->
         <div class="mb-4">
@@ -31,19 +31,12 @@
             <input type="email" id="email" name="email" class="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring focus:border-blue-300" placeholder="Enter your email">
         </div>
 
-        <!-- Password Input -->
-        <div class="mb-4">
-            <label for="password" class="block text-gray-700 text-sm font-bold mb-2">Password</label>
-            <input type="password" id="password" name="password" class="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring focus:border-blue-300" placeholder="Enter your password">
-        </div>
-
-        <!-- Forgot Password Link -->
-        <div class="mb-6 text-left">
-            <a href="{{ route('frogotPass') }}" class="text-sm text-blue-500 hover:underline">Forgot Password?</a>
-        </div>
-
         <!-- Login Button -->
-        <button class="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 focus:outline-none focus:ring focus:border-blue-300 w-full">Login</button>
+        <button class="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 focus:outline-none focus:ring focus:border-blue-300 w-full">Send Password</button>
+    
+        <div class="my-6 text-left">
+            <a href="{{ route('login') }}" class="text-sm text-blue-500 hover:underline">Login Now?</a>
+        </div>
     </div>
 
 </body>

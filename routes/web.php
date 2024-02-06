@@ -26,5 +26,11 @@ Route::get('/contact', 'ContactGetController@contact')->name("contact");
 Route::get('/blogPost', 'SinglePostGetController@blogPost')->name("blogPost");
 
 Route::get('/admin/login', 'LoginGetController@login')->name("login");
+Route::get('/admin/frogotPass', 'ForgottenPasswordGetController@frogotPass')->name("frogotPass");
 Route::get('/admin/dashboard', 'DashboardGetController@dashboard')->name("dashboard");
 Route::get('/admin/blogs', 'BlogsGetController@blogs')->name("blogs");
+Route::get('/admin/allBlogs', 'AllBlogsGetController@allBlogs')->name("allBlogs");
+Route::get('/admin/allUsers', 'AllUsersGetController@allUsers')->name("allUsers");
+Route::get('/admin/profile', 'ProfileGetController@profile')->name("profile");
+Route::get('/admin/projects', 'ProjectsGetController@projects')->name("projects");
+Route::get('/admin/categories', 'CategoriesGetController@categories')->name("categories");
