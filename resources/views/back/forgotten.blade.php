@@ -18,7 +18,7 @@
             font-family: 'Arial', sans-serif; /* Set font family as needed */
         }
     </style>
-    <title>Admin Login Page</title>
+    <title>Forgotten Password</title>
 </head>
 <body class="h-screen flex items-center justify-center">
 

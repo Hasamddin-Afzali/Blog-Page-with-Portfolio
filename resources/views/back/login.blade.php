@@ -9,13 +9,13 @@
             background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url('https://images.pexels.com/photos/276452/pexels-photo-276452.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1');
             background-size: cover;
             background-position: center;
-            height: 100vh; /* Set a minimum height for the body */
-            margin: 0; /* Remove default margin */
+            height: 100vh; 
+            margin: 0; 
             display: flex;
             align-items: center;
             justify-content: center;
-            color: white; /* Set text color to white or another suitable color */
-            font-family: 'Arial', sans-serif; /* Set font family as needed */
+            color: white; 
+            font-family: 'Arial', sans-serif; 
         }
     </style>
     <title>Admin Login Page</title>

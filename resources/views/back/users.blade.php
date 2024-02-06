@@ -4,20 +4,15 @@
 
 <div class="bg-gray-100">
     <div class="bg-white p-4 rounded-md shadow-md">
-        <h2 class="text-lg font-semibold mb-4">All Users</h2>
+        <h2 class="text-lg font-semibold bg-gray-700 p-4 text-gray-300"> <i class="fas fa-users text-green-500"></i> @yield('title') All Users</h2>
         <!-- Filter and Search -->
-        <div class="flex items-end justify-between flex-row mt-4 bg-gray-200 p-4 my-4">
-            
+        <div class="flex items-end justify-between flex-row bg-gray-200 p-4">
             <div class="w-3/4 mx-2">
-                <label for="search" class="block text-gray-700 font-medium mb-2">Search</label>
-                <input type="text" id="search" name="search"
-                    class="w-full px-4 py-2 bg-gray-100 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
-                    placeholder="Search...">
+                <label for="search" class="block text-gray-700 font-medium mb-2"><i class="fas fa-search"></i> Search</label>
+                <input type="text" id="search" name="search"class="w-full px-4 py-2 bg-gray-100 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"placeholder="Search...">
             </div>
             <div class="mb2 mx-2">
-                <!-- Button to trigger the modal -->
-                <button id="addUserBtn"
-                    class="bg-indigo-500 text-white px-4 py-2 rounded-md hover:bg-indigo-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">+ Add User</button>
+                <button id="addUserBtn" class="bg-green-500 text-white px-4 py-2 rounded-md hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"><i class="fas fa-plus"></i> Add User</button>
             </div>
         </div>
 
@@ -33,38 +28,26 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <!-- Replace the content below with dynamic data -->
                     <tr>
                         <td class="border px-4 py-2">1</td>
                         <td class="border px-4 py-2">User Name</td>
                         <td class="border px-4 py-2">Email</td>
                         <td class="border px-4 py-2">
-                            <a href="#" class="text-blue-500">Edit</a> |
-                            <a href="#" class="text-red-500">Delete</a>
+                            <a href="#" class="text-blue-500 rounded"><i class="fas fa-edit"></i> </a>  |   
+                            <a href="#" class="text-red-500 rounded"><i class="fas fa-trash-alt"></i> </a>
                         </td>
                     </tr>
-                    <!-- Add more rows as needed -->
                 </tbody>
             </table>
         </div>
 
         <!-- Pagination -->
         <div class="flex justify-end mt-4">
-            <button class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded-l">
-                Prev
-            </button>
-            <button class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4">
-                1
-            </button>
-            <button class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4">
-                2
-            </button>
-            <button class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4">
-                3
-            </button>
-            <button class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4">
-                Next
-            </button>
+            <button class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded-l">Prev</button>
+            <button class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4">1</button>
+            <button class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4">2</button>
+            <button class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4">3</button>
+            <button class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4">Next</button>
         </div>
     </div>
 </div>
@@ -76,25 +59,19 @@
         <div class="bg-white p-6 rounded-lg shadow-xl w-96" >
             <div class="mb-4">
                 <label for="username" class="block text-gray-700 font-medium mb-2">Username</label>
-                <input type="text" id="username" name="username"
-                    class="w-full px-4 py-2 bg-gray-100 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
+                <input type="text" id="username" name="username" class="w-full px-4 py-2 bg-gray-100 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
             </div>
             <div class="mb-4">
                 <label for="email" class="block text-gray-700 font-medium mb-2">Email</label>
-                <input type="email" id="email" name="email"
-                    class="w-full px-4 py-2 bg-gray-100 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
+                <input type="email" id="email" name="email" class="w-full px-4 py-2 bg-gray-100 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
             </div>
             <div class="mb-4">
                 <label for="password" class="block text-gray-700 font-medium mb-2">Password</label>
-                <input type="password" id="password" name="password"
-                    class="w-full px-4 py-2 bg-gray-100 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
+                <input type="password" id="password" name="password" class="w-full px-4 py-2 bg-gray-100 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
             </div>
             <div class="flex justify-end">
-                <button id="createUserBtn"
-                    class="bg-indigo-500 text-white px-4 py-2 rounded-md hover:bg-indigo-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Create
-                    User</button>
-                <button id="closeModalBtn"
-                    class="bg-gray-300 text-gray-700 px-4 py-2 rounded-md hover:bg-gray-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 ml-4">Close</button>
+                <button id="createUserBtn" class="bg-green-500 text-white px-4 py-2 rounded-md hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"><i class="fas fa-plus"></i> CreateUser</button>
+                <button id="closeModalBtn" class="bg-gray-300 text-gray-700 px-4 py-2 rounded-md hover:bg-gray-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 ml-4">Close</button>
             </div>
         </div>
     </div>
