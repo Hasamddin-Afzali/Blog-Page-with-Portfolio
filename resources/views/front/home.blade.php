@@ -30,7 +30,7 @@
     </div>
     <!-- Right Column (Image) -->
     <div class="flex-shrink-0">
-      <img src="https://mdbcdn.b-cdn.net/img/new/ecommerce/vertical/117.jpg" alt="Your Image"
+        <img src="https://mdbcdn.b-cdn.net/img/new/ecommerce/vertical/117.jpg" alt="Your Image"
         class="w-full md:w-96 h-64 md:h-96 rounded-full object-cover">
     </div>
   </div>
@@ -48,37 +48,15 @@
     <!-- all blogs starts here -->
     <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
       <!-- Column 1 -->
-      <div class="bg-white p-4 rounded-3xl shadow-md">
-        <img src="https://mdbcdn.b-cdn.net/img/new/ecommerce/vertical/117.jpg" alt="Image 1"
-          class="w-full h-72 rounded-3xl mb-4">
-        <div class="text-xl font-bold mb-2">How to create a website for free and how to publish it</div>
-        <div class="text-gray-500 text-sm mb-2">February 1, 2024</div>
-        <div class="text-blue-500 mb-2">Category 1</div>
-        <p class="text-gray-800">Short description for Content 1. Lorem ipsum dolor sit amet, consectetur adipiscing
-          elit.<a href="{{ route('blogPost') }}" class="text-blue-500">see more...</a></p>
-      </div>
-
-      <!-- Column 2 -->
-      <div class="bg-white p-4 rounded-3xl shadow-md">
-        <img src="https://mdbcdn.b-cdn.net/img/new/ecommerce/vertical/117.jpg" alt="Image 2"
-          class="w-full h-72 rounded-3xl mb-4">
-        <div class="text-xl font-bold mb-2">Title 2</div>
-        <div class="text-gray-500 text-sm mb-2">January 28, 2024</div>
-        <div class="text-blue-500 mb-2">Category 2</div>
-        <p class="text-gray-800">Short description for Content 2. Sed do eiusmod tempor incididunt ut labore et dolore
-          magna aliqua.<a href="{{ route('blogPost') }}" class="text-blue-500">see more...</a></p>
-      </div>
-      <!-- Column 3 -->
-      <div class="bg-white p-4 rounded-3xl shadow-md">
-        <img src="https://mdbcdn.b-cdn.net/img/new/ecommerce/vertical/117.jpg" alt="Image 3"
-          class="w-full h-72 rounded-3xl mb-4">
-        <div class="text-xl font-bold mb-2">Title 3</div>
-        <div class="text-gray-500 text-sm mb-2">January 15, 2024</div>
-        <div class="text-blue-500 mb-2">Category 3</div>
-        <p class="text-gray-800">Short description for Content 3. Ut enim ad minim veniam, quis nostrud exercitation
-          ullamco laboris nisi ut aliquip ex ea commodo consequat. <a href="{{ route('blogPost') }}"
-            class="text-blue-500">see more...</a></p>
-      </div>
+        @foreach($posts as $post)
+            <div class="bg-white p-4 rounded-3xl shadow-md">
+                <img src={{$post->img_path}} alt="Image" class="w-full h-72 rounded-3xl mb-4">
+                <div class="text-xl font-bold mb-2">{{$post->title}}</div>
+                <div class="text-gray-500 text-sm mb-2">{{$post->created_at->format('F d, Y')}}</div>
+                <div class="text-blue-500 mb-2">{{$post->getRelation('category')->title}}</div>
+                <p class="text-gray-800">{{substr($post->body,0,100).'... '}}<br><a href="{{ 'blog/'.$post->id }}" class="text-blue-500">see more</a></p>
+            </div>
+        @endforeach
     </div>
     <!-- all blogs ends here  -->
   </div>

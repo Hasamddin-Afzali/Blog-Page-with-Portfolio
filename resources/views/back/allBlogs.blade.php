@@ -1,7 +1,6 @@
 @extends('back.layouts.master')
 @section('title', 'All Blogs')
 @section('content')
-
 <div class="bg-gray-100">
     <div class="bg-white p-4 rounded-md shadow-md">
         <h2 class="text-lg font-semibold bg-gray-700 p-4 text-gray-300"><i class="fas fa-th-large text-green-500"></i> @yield('title')</h2>
@@ -12,6 +11,9 @@
                 <select id="category" name="category"
                     class="w-full px-4 py-2 bg-gray-100 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
                     <option value="">All</option>
+                    @foreach($categories as $category)
+                        <option value="{{$category->id}}">{{$category->title}}</option>
+                    @endforeach
                     <option value="technology">Technology</option>
                     <option value="fashion">Fashion</option>
                     <option value="food">Food</option>
@@ -22,7 +24,7 @@
                 <input type="text" id="search" name="search" class="w-full px-4 py-2 bg-gray-100 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500" placeholder="Search...">
             </div>
             <div class="mb2 mx-2">
-                <a href="{{route('blogs')}}"><button type="submit" class="bg-green-500 text-white px-4 py-2 rounded-md hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"><i class="fas fa-plus"></i> Add Blog</button></a>
+                <a href="{{route('admin.newPost')}}"><button type="submit" class="bg-green-500 text-white px-4 py-2 rounded-md hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"><i class="fas fa-plus"></i> Add Blog</button></a>
             </div>
         </div>
 
@@ -34,12 +36,25 @@
                         <th class="px-4 py-2">ID</th>
                         <th class="px-4 py-2">Title</th>
                         <th class="px-4 py-2">Category</th>
-                        <th class="px-4 py-2">Content</th>
-                        <th class="px-4 py-2">Image</th>
+                        <th class="px-4 py-2">Created By</th>
+                        <th class="px-4 py-2">Created At</th>
                         <th class="px-4 py-2">Actions</th>
                     </tr>
                 </thead>
                 <tbody>
+                @foreach($posts as $post)
+                    <tr>
+                        <td class="border px-4 py-2">{{$post->id}}</td>
+                        <td class="border px-4 py-2">{{$post->title}}</td>
+                        <td class="border px-4 py-2">{{$post->getRelation('category')->title}}</td>
+                        <td class="border px-4 py-2">{{($post->getRelation('createdBy')->first_name).' '.($post->getRelation('createdBy')->last_name)}}</td>
+                        <td class="border px-4 py-2">{{$post->created_at->format('d F Y')}}</td>
+                        <td class="border px-4 py-2">
+                            <a href="#" class="text-blue-500 rounded"><i class="fas fa-edit"></i> </a>  |
+                            <a href="#" class="text-red-500 rounded"><i class="fas fa-trash-alt"></i> </a>
+                        </td>
+                    </tr>
+                @endforeach
                     <tr>
                         <td class="border px-4 py-2">1</td>
                         <td class="border px-4 py-2">Sample Title</td>
@@ -47,7 +62,7 @@
                         <td class="border px-4 py-2">Sample Content</td>
                         <td class="border px-4 py-2">Sample Image</td>
                         <td class="border px-4 py-2">
-                            <a href="#" class="text-blue-500 rounded"><i class="fas fa-edit"></i> </a>  |   
+                            <a href="#" class="text-blue-500 rounded"><i class="fas fa-edit"></i> </a>  |
                             <a href="#" class="text-red-500 rounded"><i class="fas fa-trash-alt"></i> </a>
                         </td>
                     </tr>
@@ -58,7 +73,7 @@
                         <td class="border px-4 py-2">Sample Content</td>
                         <td class="border px-4 py-2">Sample Image</td>
                         <td class="border px-4 py-2">
-                            <a href="#" class="text-blue-500 rounded"><i class="fas fa-edit"></i> </a>  |   
+                            <a href="#" class="text-blue-500 rounded"><i class="fas fa-edit"></i> </a>  |
                             <a href="#" class="text-red-500 rounded"><i class="fas fa-trash-alt"></i> </a>
                         </td>
                     </tr>
@@ -69,7 +84,7 @@
                         <td class="border px-4 py-2">Sample Content</td>
                         <td class="border px-4 py-2">Sample Image</td>
                         <td class="border px-4 py-2">
-                            <a href="#" class="text-blue-500 rounded"><i class="fas fa-edit"></i> </a>  |   
+                            <a href="#" class="text-blue-500 rounded"><i class="fas fa-edit"></i> </a>  |
                             <a href="#" class="text-red-500 rounded"><i class="fas fa-trash-alt"></i> </a>
                         </td>
                     </tr>
@@ -79,11 +94,13 @@
 
         <!-- Pagination -->
         <div class="flex justify-end mt-4">
-            <button class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded-l">Prev</button>
+            {{$posts->links()}}
+<!--            <button class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded-l">Prev</button>
             <button class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4">1</button>
             <button class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4">2</button>
             <button class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4">3</button>
             <button class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4"> Next </button>
+-->
         </div>
     </div>
 </div>

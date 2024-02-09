@@ -14,6 +14,26 @@
         <div class=" p-8 flex justify-between  flex-col md:flex-row">
             <!-- Left Column - Blogs -->
             <div class="flex flex-wrap md:w-3/4 ">
+                <!-- From Database -->
+                @foreach($posts as $post)
+                    <div class="flex items-center justify-between bg-white rounded-3xl p-4 my-4 ">
+                        <div class="image">
+                            <img src="{{$post->img_path}}" alt="Blog Image" class="w-64 h-44 rounded-3xl">
+                        </div>
+                        <div class="content mx-4">
+                            <!-- Blog Details -->
+                            <div class="mb-4">
+                                <h2 class="text-2xl font-bold">{{$post->title}}</h2>
+                                <p class="text-gray-600">Posted on {{$post->created_at->format('F d, Y')}}</p>
+                                <p class="text-gray-600">Category: {{$post->getRelation('category')->title}}</p>
+                            </div>
+                            <!-- Blog Description -->
+                            <p class="text-gray-800"> {{substr($post->body,0,200).'... '}}</p>
+                        </div>
+                    </div>
+                @endforeach
+                <!-- End From Database -->
+
                 <!-- Blog Image -->
                 <div class="flex items-center justify-between bg-white rounded-3xl p-4 my-4 ">
                     <div class="image">
@@ -68,45 +88,7 @@
                     <h3 class="text-xl font-bold mb-4">Categories</h3>
                     <hr>
                     <ul class="my-4">
-                        <li class="mb-2">
-                            <div class="flex items-center">
-                                <span class="toggle text-blue-500 cursor-pointer mr-2"><i class="fas fa-chevron-right text-sm"></i></span> <a href="#" class="text-blue-500">Web Development</a>
-                            </div>
-                            <ul class="ml-4 hidden">
-                                <li class="mb-2"> <a href="#" class="text-blue-500">Frontend</a> </li>
-                                <li class="mb-2">
-                                    <div class="flex items-center">
-                                        <span class="toggle text-blue-500 cursor-pointer mr-2"><i class="fas fa-chevron-right text-sm"></i></span> <a href="#" class="text-blue-500">Backend</a>
-                                    </div>
-                                    <ul class="ml-4 hidden">
-                                        <li class="mb-2"> <a href="#" class="text-blue-500">Node.js</a> </li>
-                                        <li class="mb-2"> <a href="#" class="text-blue-500">Django</a> </li>
-                                        <!-- Add more subcategories as needed -->
-                                    </ul>
-                                </li>
-                            </ul>
-                        </li>
-                        <li class="mb-2">
-                            <div class="flex items-center">
-                                <span class="toggle text-blue-500 cursor-pointer mr-2"><i class="fas fa-chevron-right text-sm"></i></span> <a href="#" class="text-blue-500">Mobile App</a>
-                            </div>
-                            <ul class="ml-4 hidden">
-                                <li class="mb-2"> <a href="#" class="text-blue-500">Android</a> </li>
-                                <li class="mb-2"> <a href="#" class="text-blue-500">iOS</a> </li>
-                                <!-- Add more subcategories as needed -->
-                            </ul>
-                        </li>
-                        <li class="mb-2">
-                            <div class="flex items-center">
-                                <span class="toggle text-blue-500 cursor-pointer mr-2"><i class="fas fa-chevron-right text-sm"></i></span> <a href="#" class="text-blue-500">Data Science</a>
-                            </div>
-                            <ul class="ml-4 hidden">
-                                <li class="mb-2"> <a href="#" class="text-blue-500">Machine Learning</a> </li>
-                                <li class="mb-2"> <a href="#" class="text-blue-500">Data Analysis</a> </li>
-                                <!-- Add more subcategories as needed -->
-                            </ul>
-                        </li>
-                        <!-- Add more categories as needed -->
+                        {{ \App\Http\Controllers\Controller::listCategories() }}
                     </ul>
                 </div>
 

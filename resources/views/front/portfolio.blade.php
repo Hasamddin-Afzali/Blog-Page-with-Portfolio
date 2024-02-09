@@ -35,12 +35,22 @@
     <div class="w-1/2 p-4">
         <h2 class="text-3xl font-bold mb-4">Project Showcase</h2><hr>
 
+        @foreach($projects as $project)
+            <div class="mb-8">
+                <h3 class="text-xl font-bold mb-2">{{$project->title}}</h3>
+                <p class="text-gray-600 mb-4">{{$project->description}}</p>
+                <a href="{{$project->link}}" class="bg-blue-500 text-white py-2 px-4 rounded">Learn More</a>
+                <!-- <button class="bg-blue-500 text-white py-2 px-4 rounded">Learn More</button> -->
+            </div>
+        @endforeach
+
         <!-- Project 1 -->
         <div class="mb-8">
             <h3 class="text-xl font-bold mb-2">Project Title 1</h3>
             <p class="text-gray-600 mb-4">Description of Project 1. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
             <button class="bg-blue-500 text-white py-2 px-4 rounded">Learn More</button>
         </div>
+
 
         <!-- Add more projects as needed -->
 
