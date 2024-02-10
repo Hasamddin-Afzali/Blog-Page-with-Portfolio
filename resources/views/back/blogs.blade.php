@@ -62,10 +62,10 @@
         </form>
 
         <script>
-            CKEDITOR.replace('id_content', {
-                filebrowserBrowseUrl: '/browser/browse.php',
-                filebrowserUploadUrl: '/uploader/upload.php'
-            });
+        CKEDITOR.replace('id_content', {
+            filebrowserUploadUrl: "{{ route('upload', ['_token' => csrf_token() ]) }}",
+            filebrowserUploadMethod: "form"
+        });
         </script>
     </div>
 </div>

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\UploadController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers;
 
@@ -8,6 +9,8 @@ Route::get('/admin/allUsers', 'AllUsersGetController@allUsers')->name("allUsers"
 Route::get('/admin/profile', 'ProfileGetController@profile')->name("profile");
 Route::get('/admin/projects', 'ProjectsGetController@projects')->name("projects");
 Route::get('/admin/categories', 'CategoriesGetController@categories')->name("categories");
+
+Route::post('upload_image', 'UploadController@upload')->name('upload');
 
 Route::get('/', 'Controller@home')->name('home');
 Route::get('blog', 'Controller@blog')->name('blog');
