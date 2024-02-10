@@ -29,13 +29,13 @@
             <!-- Email Input -->
             <div class="mb-4">
                 <label for="email" class="block text-gray-700 text-sm font-bold mb-2">Email</label>
-                <input type="email" id="email" name="email" class="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring focus:border-blue-300" placeholder="Enter your email">
+                <input type="email" id="email" name="email" class="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring focus:border-blue-300 text-black" placeholder="Enter your email">
             </div>
 
             <!-- Password Input -->
             <div class="mb-4">
                 <label for="password" class="block text-gray-700 text-sm font-bold mb-2">Password</label>
-                <input type="password" id="password" name="password" class="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring focus:border-blue-300" placeholder="Enter your password">
+                <input type="password" id="password" name="password" class="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring focus:border-blue-300 text-black" placeholder="Enter your password">
             </div>
 
             <!-- Forgot Password Link -->

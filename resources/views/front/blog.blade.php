@@ -4,82 +4,36 @@
 
 <header class="bg-cover bg-center h-screen flex items-center text-white bg-no-repeat relative" style="width:100%;height:300px;background-image: url('https://mdbcdn.b-cdn.net/img/new/slides/146.webp');">
     <div class="absolute inset-0 bg-black bg-opacity-50"></div>
-    <div class="container mx-auto text-center relative z-10">
-        <h1 class="text-5xl font-bold mb-4"><span class="text-red-500">@yield('title')</span></h1>
-    </div>
+    <div class="container mx-auto text-center relative z-10"> <h1 class="text-5xl font-bold mb-4"> <span class="text-red-500"> Blog </span> </h1> </div>
 </header>
 
 <div class="bg-gray-100">
     <div class="lg:container lg:mx-auto lg:w-3/4">
-        <div class=" p-8 flex justify-between  flex-col md:flex-row">
+        <div class="p-8 flex justify-between  flex-col md:flex-row ">
             <!-- Left Column - Blogs -->
-            <div class="flex flex-wrap md:w-3/4 ">
+            <div class="flex flex-wrap md:w-3/4">
                 <!-- From Database -->
                 @foreach($posts as $post)
-                    <div class="flex items-center justify-between bg-white rounded-3xl p-4 my-4 ">
+                    <div class="flex flex-col md:flex-row lg:items-start justify-between bg-white rounded-3xl p-4 my-4">
                         <div class="image">
-                            <img src="{{$post->img_path}}" alt="Blog Image" class="w-64 h-44 rounded-3xl">
+                            <img src="{{$post->img_path}}" alt="Blog Image" class=" lg:w-64 lg:-h-44 rounded-3xl object-cover md:max-w-full">
                         </div>
-                        <div class="content mx-4">
+                        <div class="content lg:mx-4 lg:w-3/4 lg:my-0 my-4">
                             <!-- Blog Details -->
-                            <div class="mb-4">
+                            <div>
                                 <h2 class="text-2xl font-bold">{{$post->title}}</h2>
                                 <p class="text-gray-600">Posted on {{$post->created_at->format('F d, Y')}}</p>
-                                <p class="text-gray-600">Category: {{$post->getRelation('category')->title}}</p>
+                                <p class="text-blue-600 font-bold">Category: {{$post->getRelation('category')->title}}</p>
                             </div>
                             <!-- Blog Description -->
-                            <p class="text-gray-800"> {{substr($post->body,0,200).'... '}}</p>
+                            <p class="text-gray-800"> {!!substr($post->body,0,100).'... '!!}</p>
+                            <a href="{{ 'blog/'.$post->id }}" class="text-blue-500">see more</a>
                         </div>
                     </div>
                 @endforeach
+                {{$posts->links()}}
                 <!-- End From Database -->
-
-                <!-- Blog Image -->
-                <div class="flex items-center justify-between bg-white rounded-3xl p-4 my-4 ">
-                    <div class="image">
-                        <img src="https://mdbcdn.b-cdn.net/img/new/ecommerce/vertical/117.jpg" alt="Blog Image" class="w-64 h-44 rounded-3xl">
-                    </div>
-                    <div class="content mx-4">
-                        <!-- Blog Details -->
-                        <div class="mb-4">
-                            <h2 class="text-2xl font-bold">Blog Title</h2>
-                            <p class="text-gray-600">Posted on February 2, 2024</p>
-                            <p class="text-gray-600">Category: Web Development</p>
-                        </div>
-                        <!-- Blog Description -->
-                        <p class="text-gray-800"> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                    </div>
-                </div>
-                <div class="flex items-center justify-between bg-white rounded-3xl p-4 my-4 ">
-                    <div class="image">
-                        <img src="https://mdbcdn.b-cdn.net/img/new/ecommerce/vertical/117.jpg" alt="Blog Image" class="w-64 h-44 rounded-3xl">
-                    </div>
-                    <div class="content mx-4">
-                        <!-- Blog Details -->
-                        <div class="mb-4">
-                            <h2 class="text-2xl font-bold">Blog Title</h2>
-                            <p class="text-gray-600">Posted on February 2, 2024</p>
-                            <p class="text-gray-600">Category: Web Development</p>
-                        </div>
-                        <!-- Blog Description -->
-                        <p class="text-gray-800"> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                    </div>
-                </div>
-                <div class="flex items-center justify-between bg-white rounded-3xl p-4 my-4 ">
-                    <div class="image">
-                        <img src="https://mdbcdn.b-cdn.net/img/new/ecommerce/vertical/117.jpg" alt="Blog Image" class="w-64 h-44 rounded-3xl">
-                    </div>
-                    <div class="content mx-4">
-                        <!-- Blog Details -->
-                        <div class="mb-4">
-                            <h2 class="text-2xl font-bold">Blog Title</h2>
-                            <p class="text-gray-600">Posted on February 2, 2024</p>
-                            <p class="text-gray-600">Category: Web Development</p>
-                        </div>
-                        <!-- Blog Description -->
-                        <p class="text-gray-800"> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                    </div>
-                </div>
+                
             </div>
             <!-- Right Column - Categories and Top Watched Blogs -->
             <div class="md:w-1/3 md:ml-8">
@@ -105,6 +59,8 @@
         </div>
     </div>
 </div>
+
+
 
 <script>
     document.querySelectorAll('.toggle').forEach(item => {

@@ -32,7 +32,7 @@ class Controller extends BaseController
     {
         $data['posts'] = Post::where('isDeleted', 0)
             ->with('category')->with('createdBy')
-            ->orderBy('created_at', 'desc')->get();
+            ->orderBy('created_at', 'desc')->paginate(5);
         //$data['categories'] = Category::where('isDeleted', 0)->get();
         return view('front.blog', $data);
     }
