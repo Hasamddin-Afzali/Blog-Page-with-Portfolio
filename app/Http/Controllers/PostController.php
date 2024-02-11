@@ -16,46 +16,101 @@ class PostController extends Controller
         $data['posts'] = Post::where('isDeleted', 0)
             ->with('category')->with('createdBy')->paginate(3);
         $data['categories'] = Category::where('isDeleted', 0)->get();
-        //echo asset('storage/public/img/post20240209/9BspIzcJMek668MmzXtNh7DomBu45UA6DM1zrS8j.png');
         return view('back.allBlogs', $data);
     }
 
     public function newPost(): View
     {
-        $categories = Category::where('isDeleted', 0)->get();
-        return view('back.blogs', compact('categories'));
+        $data['edit'] = false;
+        $data['categories'] = Category::where('isDeleted', 0)->get();
+        return view('back.blogs', $data);
     }
+
 
     public function addNewPost(Request $request)
     {
-
-        /*$validation = $request->validate([
+        $validation = $request->validate([
             'title' => 'required',
             'category' => 'required',
-            'images' => 'array',
-            'images.*' => 'image',
-            'content' => 'required'
-        ]);*/
-        //echo $validation;
-        //dd($request->file('images'));
-        //if(!$validation)
-        //    return redirect()->back()->with('error', 'Bilinmeyen bir hata oluştu.');
-        $path = '/public/img/post'.now()->format('Ymd');
-        Storage::makeDirectory($path);
-        if($request->file('images') != null){
-            foreach ($request->file('images') as $image)
-                Storage::putFile($path, $image);
-        }
+            'image' => 'required|mimes:jpeg,jpg,png,gif',
+            'shortDescription' => 'required',
+            'postContent' => 'required'
+        ]);
+
+        $directoryPath = '/public/img/postHeaders';
+        $image = $request->file('image');
+
+        if(!Storage::exists($directoryPath))
+            Storage::makeDirectory($directoryPath);
+        $imagePath = '/storage'.substr(Storage::putFile($directoryPath, $image),6);// 6: public => storage
 
         Post::create([
             'title'=>$request->title,
             'category'=>$request->category,
-            'img_path'=>'/img/blog-back.jpg',
+            'img_path'=> $imagePath,
+            'short_description'=>$request->shortDescription,
             'body'=>$request->postContent,
             'created_by'=>Auth::user()->id,
             'created_at'=>now()
         ]);
 
-        return redirect()->back()->with('addPost.success', 'Post başarı şekilde eklendi.');
+        return redirect()->back()->with('addPostSuccess');
+    }
+
+    public function editPostPage(Request $request)
+    {
+        if($request->action == "Update") {
+            $data['edit'] = true;
+            $post = json_decode($request->post);
+            //dd($request->post);
+            $data['id'] = $post->id;
+            $data['title'] = $post->title;
+            $data['categoryId'] = $post->category->id;
+            $data['description'] = $post->short_description;
+            $data['imagePath'] = $post->img_path;
+            $data['postContent'] = $post->body;
+            $data['categories'] = Category::where('isDeleted', 0)->get();
+            return view('back.blogs', $data);
+        }
+        else{
+            $id = json_decode($request->post)->id;
+            $post = Post::where('id', $id)->get()[0];
+            $post->isDeleted = 1;
+            $post->deleted_by = Auth::user()->id;
+            $post->save();
+            return redirect()->back()->with('deletePostSuccess');
+        }
+
+    }
+
+    public function editPost(Request $request)
+    {
+        $validation = $request->validate([
+            'title' => 'required',
+            'category' => 'required',
+            'image' => 'mimes:jpeg,jpg,png,gif',
+            'shortDescription' => 'required',
+            'postContent' => 'required'
+        ]);
+
+        $imagePath = $request->imagePath;
+        if($request->hasFile('image')){
+            $directoryPath = '/public/img/postHeaders';
+            $image = $request->file('image');
+            if(!Storage::exists($directoryPath))
+                Storage::makeDirectory($directoryPath);
+            $imagePath = '/storage'.substr(Storage::putFile($directoryPath, $image),6);
+        }
+
+        $post = Post::where('id', $request->id)->get()[0];
+
+        $post->title =$request->title;
+        $post->category = $request->category;
+        $post->img_path = $imagePath;
+        $post->short_description = $request->shortDescription;
+        $post->body = $request->postContent;
+        $post->updated_by = Auth::user()->id;
+        $post->save();
+        return redirect()->route('admin.blog')->with('editPostSuccess');
     }
 }

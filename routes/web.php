@@ -27,6 +27,8 @@ Route::prefix('admin')->name('admin.')->group(function (){
         Route::get('blog', 'PostController@allBlogs')->name('blog');
         Route::get('blog/new','PostController@newPost')->name('newPost');
         Route::post('blog/new-post', 'PostController@addNewPost')->name('addNewPost');
+        Route::get('blog/edit','PostController@editPostPage')->name('editPostPage');
+        Route::post('blog/edit-post', 'PostController@editPost')->name('editPost');
         Route::get('category', 'CategoryController@category')->name('category');
         Route::get('contacts', 'ContactController@contacts')->name('contacts');
         Route::get('logout', 'UserController@logout')->name('logout');

@@ -46,13 +46,13 @@
     </div>
     <!-- title of blogs ends here -->
     <!-- all blogs starts here -->
-    
+
     <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
       <!-- Column 1 -->
         @foreach($posts as $post)
         <a href="{{ 'blog/'.$post->id }}" class="text-blue-500 flex">
             <div class="bg-white p-4 rounded-3xl shadow-md hover:shadow-lg">
-                <img src={{$post->img_path}} alt="Image" class="w-full h-72 rounded-3xl mb-4">
+                <img src="{{$post->img_path}}" alt="Image" class="w-full h-72 rounded-3xl mb-4">
                 <div class="text-xl font-bold mb-2 text-black">{{$post->title}}</div>
                 <div class="text-gray-500 text-sm mb-2">{{$post->created_at->format('F d, Y')}}</div>
                 <div class="text-blue-500 mb-2">{{$post->getRelation('category')->title}}</div>

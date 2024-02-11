@@ -12,6 +12,7 @@ class Post extends Model
         'title',
         'category',
         'img_path',
+        'short_description',
         'body',
         'created_by',
         'created_at',
