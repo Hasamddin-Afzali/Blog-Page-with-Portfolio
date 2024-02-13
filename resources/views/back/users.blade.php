@@ -27,21 +27,27 @@
                 <thead>
                     <tr class="bg-gray-300 text-left">
                         <th class="px-4 py-2">ID</th>
-                        <th class="px-4 py-2">User Name</th>
+                        <th class="px-4 py-2">First Name</th>
+                        <th class="px-4 py-2">Last Name</th>
                         <th class="px-4 py-2">Email</th>
                         <th class="px-4 py-2">Actions</th>
                     </tr>
                 </thead>
                 <tbody>
+                    @foreach($users as $user)
                     <tr>
-                        <td class="border px-4 py-2">1</td>
-                        <td class="border px-4 py-2">User Name</td>
-                        <td class="border px-4 py-2">Email</td>
+                        <td class="border px-4 py-2">{{$user->id}}</td>
+                        <td class="border px-4 py-2">{{$user->first_name}}</td>
+                        <td class="border px-4 py-2">{{$user->last_name}}</td>
+                        <td class="border px-4 py-2">{{$user->email}}</td>
                         <td class="border px-4 py-2">
-                            <a href="#" class="text-blue-500 rounded"><i class="fas fa-edit"></i> </a>  |   
-                            <a href="#" class="text-red-500 rounded"><i class="fas fa-trash-alt"></i> </a>
+                            <form action="">
+                            <button class="text-blue-500 rounded"><i class="fas fa-edit"></i> </button>  |   
+                            <button onclick="return confirm('Are You sure to delete')" class="text-red-500 rounded"><i class="fas fa-trash-alt"></i> </button>
+                            </form>
                         </td>
                     </tr>
+                    @endforeach
                 </tbody>
             </table>
         </div>
@@ -61,23 +67,37 @@
 <div id="addUserModal" class="fixed z-10 inset-0 overflow-y-auto hidden bg-gray-500 bg-opacity-75">
     <!-- Modal content -->
     <div class="flex items-center justify-center min-h-screen">
-        <div class="bg-white p-6 rounded-lg shadow-xl w-96" >
-            <div class="mb-4">
-                <label for="username" class="block text-gray-700 font-medium mb-2">Username</label>
-                <input type="text" id="username" name="username" class="w-full px-4 py-2 bg-gray-100 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
-            </div>
-            <div class="mb-4">
-                <label for="email" class="block text-gray-700 font-medium mb-2">Email</label>
-                <input type="email" id="email" name="email" class="w-full px-4 py-2 bg-gray-100 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
-            </div>
-            <div class="mb-4">
-                <label for="password" class="block text-gray-700 font-medium mb-2">Password</label>
-                <input type="password" id="password" name="password" class="w-full px-4 py-2 bg-gray-100 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
-            </div>
-            <div class="flex justify-end">
-                <button id="createUserBtn" class="bg-green-500 text-white px-4 py-2 rounded-md hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"><i class="fas fa-plus"></i> CreateUser</button>
-                <button id="closeModalBtn" class="bg-gray-300 text-gray-700 px-4 py-2 rounded-md hover:bg-gray-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 ml-4">Close</button>
-            </div>
+        <div class="bg-white p-6 rounded-lg shadow-xl w-96">
+            <form id="addUserForm" action="{{ route('admin.addNewUser') }}" method="POST">
+                @csrf <!-- CSRF koruma tokeni -->
+                <div class="mb-4">
+                    <label for="first_name" class="block text-gray-700 font-medium mb-2">First Name</label>
+                    <input type="text" id="first_name" name="first_name" class="w-full px-4 py-2 bg-gray-100 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
+                </div>
+                <div class="mb-4">
+                    <label for="last_name" class="block text-gray-700 font-medium mb-2">Last Name</label>
+                    <input type="text" id="last_name" name="last_name" class="w-full px-4 py-2 bg-gray-100 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
+                </div>
+                <div class="mb-4">
+                    <label for="email" class="block text-gray-700 font-medium mb-2">Email</label>
+                    <input type="email" id="email" name="email" class="w-full px-4 py-2 bg-gray-100 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
+                </div>
+                <div class="mb-4">
+                    <label for="password" class="block text-gray-700 font-medium mb-2">Password</label>
+                    <input type="password" id="password" name="password" class="w-full px-4 py-2 bg-gray-100 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
+                </div>
+                <div class="mb-4">
+                    <label for="auth" class="block text-gray-700 font-medium mb-2">Auth</label>
+                    <select id="auth" name="auth" class="w-full px-4 py-2 bg-gray-100 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
+                        <option value="0">0</option>
+                        <option value="1">1</option>
+                    </select>
+                </div>
+                <div class="flex justify-end">
+                    <button id="createUserBtn" class="bg-green-500 text-white px-4 py-2 rounded-md hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"><i class="fas fa-plus"></i> CreateUser</button>
+                    <button id="closeModalBtn" class="bg-gray-300 text-gray-700 px-4 py-2 rounded-md hover:bg-gray-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 ml-4">Close</button>
+                </div>
+            </form>
         </div>
     </div>
 </div>
