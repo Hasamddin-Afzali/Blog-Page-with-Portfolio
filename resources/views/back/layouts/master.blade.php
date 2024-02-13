@@ -21,7 +21,7 @@
                 <li><a href="{{ route('admin.blog') }}" class="flex items-center hover:bg-gray-700 p-2"><i class="fas fa-file-alt text-sm mr-2"></i>Blog</a></li>
                 <li><a href="{{ route('admin.category') }}" class="flex items-center hover:bg-gray-700 p-2"><i class="fas fa-tags text-sm mr-2"></i>Categories</a></li>
                 <li><a href="{{ route('projects') }}" class="flex items-center hover:bg-gray-700 p-2"><i class="fas fa-project-diagram text-sm mr-2"></i>Projects</a></li>
-                <li><a href="{{ route('allUsers') }}" class="flex items-center hover:bg-gray-700 p-2"><i class="fas fa-users text-sm mr-2"></i>Users</a></li>
+                <li><a href="{{ route('admin.allUsers') }}" class="flex items-center hover:bg-gray-700 p-2"><i class="fas fa-users text-sm mr-2"></i>Users</a></li>
                 <li><a href="{{ route('admin.contacts') }}" class="flex items-center hover:bg-gray-700 p-2"><i class="fas fa-envelope text-sm mr-2"></i>Contact</a></li>
             </ul>
         </div>
