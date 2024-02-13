@@ -1,7 +1,12 @@
 @extends('back.layouts.master')
 @section('title', 'All Users')
 @section('content')
-
+<script>
+        @if(Session::has('addUserSuccess'))
+            alert("{{'User added successfully.'}}");
+            {{Session::forget('addUserSuccess')}}
+        @endif
+    </script>
 <div class="bg-gray-100">
     <div class="bg-white p-4 rounded-md shadow-md">
         <h2 class="text-lg font-semibold bg-gray-700 p-4 text-gray-300"> <i class="fas fa-users text-green-500"></i> @yield('title') All Users</h2>
