@@ -5,7 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers;
 
 Route::get('/admin/frogotPass', 'ForgottenPasswordGetController@frogotPass')->name("frogotPass");
-Route::get('/admin/allUsers', 'AllUsersGetController@allUsers')->name("allUsers");
+//Route::get('/admin/allUsers', 'AllUsersGetController@allUsers')->name("allUsers");
 Route::get('/admin/profile', 'ProfileGetController@profile')->name("profile");
 Route::get('/admin/projects', 'ProjectsGetController@projects')->name("projects");
 Route::get('/admin/categories', 'CategoriesGetController@categories')->name("categories");
@@ -29,6 +29,10 @@ Route::prefix('admin')->name('admin.')->group(function (){
         Route::post('blog/new-post', 'PostController@addNewPost')->name('addNewPost');
         Route::get('blog/edit','PostController@editPostPage')->name('editPostPage');
         Route::post('blog/edit-post', 'PostController@editPost')->name('editPost');
+        
+        Route::post('blog/new-user', 'UserController@addNewUser')->name('addNewUser');
+        Route::get('users', 'UserController@allUsers')->name("allUsers");
+        
         Route::get('category', 'CategoryController@category')->name('category');
         Route::get('contacts', 'ContactController@contacts')->name('contacts');
         Route::get('logout', 'UserController@logout')->name('logout');
