@@ -24,7 +24,7 @@ class CreatePostsTable extends Migration
             $table->foreignId('created_by');
             $table->foreignId('updated_by')->nullable();
             $table->foreignId('deleted_by')->nullable();
-            $table->timestamp('deleted_at');
+            $table->timestamp('deleted_at')->nullable();
             $table->boolean('isDeleted')->default(0);
             $table->timestamps();
         });
