@@ -84,10 +84,17 @@
         </div>
     </div>
 </div>
-
+@if(Session::has('addProjectSuccess'))
+    {{'var'}}
+@else
+    {{'yok'}}
+@endif
 <!-- Modal for adding project -->
+<form id="projectModal" method="post">
+    @csrf
 <div id="addProjectModal" class="fixed z-10 inset-0 overflow-y-auto hidden bg-gray-500 bg-opacity-75">
     <!-- Modal content -->
+    <input type="hidden" id="hiddenIdInput" name="id" />
     <div class="flex items-center justify-center min-h-screen">
         <div class="bg-white p-6 rounded-lg shadow-xl w-96">
             <div class="mb-4">
@@ -103,12 +110,13 @@
                 <input type="text" id="projectLink" name="projectLink" class="w-full px-4 py-2 bg-gray-100 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
             </div>
             <div class="flex justify-end">
-                <button id="createProjectBtn" class="bg-green-500 text-white px-4 py-2 rounded-md hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">+ Add Project</button>
-                <button id="closeProjectModalBtn" class="bg-gray-300 text-gray-700 px-4 py-2 rounded-md hover:bg-gray-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 ml-4">Close</button>
-            </div>
+                <button id="createProjectBtn" type="submit" class="bg-green-500 text-white px-4 py-2 rounded-md hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Save</button>
+                    <button id="closeProjectModalBtn" type="button" class="bg-gray-300 text-gray-700 px-4 py-2 rounded-md hover:bg-gray-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 ml-4">Close</button>
+                </div>
         </div>
     </div>
 </div>
+    </form>
 
 <script>
     // Get modal element
@@ -127,6 +135,11 @@
 
     // Function to open modal
     function openModal() {
+        document.getElementById('projectModal').action = "{{route('admin.addNewProject')}}";
+        document.getElementById('hiddenIdInput').value = '';
+        document.getElementById('projectTitle').value = '';
+        document.getElementById('projectDesc').value = '';
+        document.getElementById('projectLink').value = '';
         modal.style.display = 'block';
     }
     // Function to close modal
@@ -138,6 +151,15 @@
         if (e.target == modal) {
             modal.style.display = 'none';
         }
+    }
+    // Function to open modal with project data
+    function openModelWithData(id, title, desc, link){
+        document.getElementById('projectModal').action = "{{route('admin.editProject')}}";
+        document.getElementById('hiddenIdInput').value = id;
+        document.getElementById('projectTitle').value = title;
+        document.getElementById('projectDesc').value = desc;
+        document.getElementById('projectLink').value = link;
+        modal.style.display = 'block';
     }
 
 </script>
