@@ -19,13 +19,13 @@ class CreateProjectsTable extends Migration
             $table->string('description');
             $table->string('link');
             $table->foreignId('created_by');
-            $table->timestamp('created_at');
             $table->foreignId('updated_by')->nullable();
-            $table->timestamp('updated_at')->nullable();
             $table->foreignId('deleted_by')->nullable();
             $table->timestamp('deleted_at')->nullable();
             $table->boolean('isDeleted')->default(0);
+            $table->timestamps();
         });
+        DB::unprepared('alter table posts MODIFY column updated_at timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP');
     }
 
     /**
