@@ -15,14 +15,25 @@ class PostController extends Controller
     {
         $data['posts'] = Post::where('isDeleted', 0)
             ->with('category')->with('createdBy')->paginate(3);
-        $data['categories'] = Category::where('isDeleted', 0)->get();
+        $data['categories'] = [];
+        $this->treeViewCategories($data['categories']);
         return view('back.allBlogs', $data);
+    }
+    private function treeViewCategories(&$array, $topId = 0, $level = 0)
+    {
+        $categories = Category::where('isDeleted', 0)->where('top_category', $topId)->get();
+        foreach ($categories as $category){
+            $category->title = str_repeat("-", $level).' '.$category->title;
+            array_push($array, $category);
+            $this->treeViewCategories($array, $category->id, $level+2);
+        }
     }
 
     public function newPost(): View
     {
         $data['edit'] = false;
-        $data['categories'] = Category::where('isDeleted', 0)->get();
+        $data['categories'] = [];
+        $this->treeViewCategories($data['categories']);
         return view('back.blogs', $data);
     }
 
