@@ -1,7 +1,19 @@
 @extends('back.layouts.master')
 @section('title', 'All Projects')
 @section('content')
+<script>
 
+    @if(Session::has('addProjectSuccess'))
+        alert('Project added successfully');
+        {{Session::forget('addProjectSuccess')}}
+    @elseif(Session::has('editProjectSuccess'))
+        alert('Project edited successfully');
+        {{Session::forget('editProjectSuccess')}}
+    @elseif(Session::has('deleteProjectSuccess'))
+        alert('Project deleted successfully');
+        {{Session::forget('deleteProjectSuccess')}}
+    @endif
+</script>
 <div class="bg-gray-100">
     <div class="bg-white p-4 rounded-md shadow-md">
         <h2 class="text-lg font-semibold bg-gray-700 p-4 text-gray-300"> <i class="fas fa-project-diagram text-green-500"></i> @yield('title') </h2>
