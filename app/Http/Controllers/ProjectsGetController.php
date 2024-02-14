@@ -46,3 +46,4 @@ class ProjectsGetController extends Controller
         return redirect()->back()->with('deleteProjectSuccess');
 
 }
+}
