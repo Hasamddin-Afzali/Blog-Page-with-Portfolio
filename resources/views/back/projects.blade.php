@@ -43,16 +43,33 @@
                     </tr>
                 </thead>
                 <tbody>
+                    
+                    @foreach($projects as $project)
+                        <?php
+                        $id = $project->id;
+                        $title = $project->title;
+                        $description = $project->description;
+                        $link = $project->link;
+                        ?>
                     <tr>
-                        <td class="border px-4 py-2">1</td>
-                        <td class="border px-4 py-2">Project Title</td>
-                        <td class="border px-4 py-2">Project Description</td>
-                        <td class="border px-4 py-2">Project Link</td>
+                        <td class="border px-4 py-2">{{$id}}</td>
+                        <td class="border px-4 py-2">{{$title}}</td>
+                        <td class="border px-4 py-2">{{$description}}</td>
+                        <td class="border px-4 py-2"><a href="{{$project->link}}">{{$link}}</a> </td>
                         <td class="border px-4 py-2">
-                            <a href="#" class="text-blue-500 rounded"><i class="fas fa-edit"></i> </a>  |   
-                            <a href="#" class="text-red-500 rounded"><i class="fas fa-trash-alt"></i> </a>
+                            <!-- <button id="editProjectBtn" onclick="openModelWithData(1, 'başlık', 'açıklama', 'link')" class="text-blue-500 rounded"><i class="fas fa-edit"></i> </button> -->
+                            <button id="editProjectBtn"
+                                    onclick="openModelWithData('{{$id}}', '{{addslashes($title)}}', '{{addslashes($description)}}', '{{$link}}')"
+                                    class="text-blue-500 rounded"><i class="fas fa-edit"></i>
+                            </button>  |
+                            <form action="{{route('admin.deleteProject')}}" method="post">
+                                @csrf
+                                <input type="hidden" name="id" value="{{$id}}"/>
+                                <button onclick="return confirm('Are you sure to delete the project?')" class="text-red-500 rounded"><i class="fas fa-trash-alt"></i> </button>
+                            </form>
                         </td>
                     </tr>
+                @endforeach
                 </tbody>
             </table>
         </div>
