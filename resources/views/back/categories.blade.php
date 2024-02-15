@@ -28,75 +28,59 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <!-- Replace the content below with dynamic data -->
+                @foreach($categories as $category)
                     <tr>
-                        <td class="border px-4 py-2">1</td>
-                        <td class="border px-4 py-2">Category 1</td>
-                        <td class="border px-4 py-2">-</td>
+                        @csrf
+                        <td class="border px-4 py-2">{{$category->id}}</td>
+                        <td class="border px-4 py-2">{!! $category->title !!}</td>
+                        <td class="border px-4 py-2">{{ is_null($category->getRelation('topCategory')) ? '-' : $category->getRelation('topCategory')->title}}</td>
                         <td class="border px-4 py-2">
-                            <a href="#" class="text-blue-500 rounded"><i class="fas fa-edit"></i> </a>  |   
-                            <a href="#" class="text-red-500 rounded"><i class="fas fa-trash-alt"></i> </a>
+                            <button type="button" onclick="openModalWithData('{{$category->id}}', '{{trim(str_replace("&nbsp;", "", $category->title))}}', '{{$category->top_category}}')" class="text-blue-500 rounded"><i class="fas fa-edit"></i> </button>  |
+                        <form action="{{route('admin.deleteCategory')}}" method="post">
+                           @csrf
+                            <input type="hidden" name="id" value="{{$category->id}}">
+                            <button type="submit" onclick="return confirm('Are you sure you want to delete this category with its sub-categories, if any?')" class="text-red-500 rounded"><i class="fas fa-trash-alt"></i> </button>
+                        </form>
                         </td>
                     </tr>
-                    <tr>
-                        <td class="border px-4 py-2">2</td>
-                        <td class="border px-4 py-2 pl-4">Subcategory 1.1</td>
-                        <td class="border px-4 py-2">Category 1</td>
-                        <td class="border px-4 py-2">
-                            <a href="#" class="text-blue-500 rounded"><i class="fas fa-edit"></i> </a>  |   
-                            <a href="#" class="text-red-500 rounded"><i class="fas fa-trash-alt"></i> </a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="border px-4 py-2">3</td>
-                        <td class="border px-4 py-2 pl-8">Sub-subcategory 1.1.1</td>
-                        <td class="border px-4 py-2">Subcategory 1.1</td>
-                        <td class="border px-4 py-2">
-                            <a href="#" class="text-blue-500 rounded"><i class="fas fa-edit"></i> </a>  |   
-                            <a href="#" class="text-red-500 rounded"><i class="fas fa-trash-alt"></i> </a>
-                        </td>
-                    </tr>
-                    <!-- Add more rows as needed -->
+                @endforeach
                 </tbody>
             </table>
         </div>
 
-        <!-- Pagination -->
-        <div class="flex justify-end mt-4">
-            <button class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded-l">Prev</button>
-            <button class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4">1</button>
-            <button class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4">2</button>
-            <button class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4">3</button>
-            <button class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4">Next</button>
-        </div>
     </div>
 </div>
 
 <!-- Modal for adding category -->
 <div id="addCategoryModal" class="fixed z-10 inset-0 overflow-y-auto hidden bg-gray-500 bg-opacity-75">
     <!-- Modal content -->
-    <div class="flex items-center justify-center min-h-screen">
-        <div class="bg-white p-6 rounded-lg shadow-xl w-96">
-            <div class="mb-4">
-                <label for="categoryName" class="block text-gray-700 font-medium mb-2">Category Name</label>
-                <input type="text" id="categoryName" name="categoryName" class="w-full px-4 py-2 bg-gray-100 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
-            </div>
-            <div class="mb-4">
-                <label for="parentCategory" class="block text-gray-700 font-medium mb-2">Parent Category</label>
-                <select id="parentCategory" name="parentCategory" class="w-full px-4 py-2 bg-gray-100 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
-                    <option value="">Select parent category</option>
-                    <!-- Populate options dynamically from database -->
-                    <option value="1">Category 1</option>
-                    <option value="2">Category 2</option>
-                    <option value="3">Category 3</option>
-                </select>
-            </div>
-            <div class="flex justify-end">
-                <button id="createCategoryBtn" class="bg-green-500 text-white px-4 py-2 rounded-md hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Add Category</button>
-                <button id="closeCategoryModalBtn" class="bg-gray-300 text-gray-700 px-4 py-2 rounded-md hover:bg-gray-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 ml-4">Close</button>
+    <form id="categoryForm" method="post">
+        @csrf
+        <div class="flex items-center justify-center min-h-screen">
+            <div class="bg-white p-6 rounded-lg shadow-xl w-96">
+                <input type="hidden" id="categoryId" name="id">
+                <div class="mb-4">
+                    <label for="categoryName" class="block text-gray-700 font-medium mb-2">
+                        Category Name<span class="text-red-600">{{$errors->first('categoryName') ? '*':''}}</span>
+                    </label>
+                    <input type="text" id="categoryName" name="categoryName" class="w-full px-4 py-2 bg-gray-100 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
+                </div>
+                <div class="mb-4">
+                    <label for="parentCategory" class="block text-gray-700 font-medium mb-2">Parent Category</label>
+                    <select id="parentCategory" name="parentCategory" class="w-full px-4 py-2 bg-gray-100 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
+                        <option value="0">Select parent category</option>
+                        @foreach($categories as $category)
+                            <option value="{{$category->id}}">{!! $category->title !!}</option>
+                        @endforeach
+                    </select>
+                </div>
+                <div class="flex justify-end">
+                    <button type="submit" id="createCategoryBtn" class="bg-green-500 text-white px-4 py-2 rounded-md hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Save</button>
+                    <button type="button" id="closeCategoryModalBtn" class="bg-gray-300 text-gray-700 px-4 py-2 rounded-md hover:bg-gray-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 ml-4">Close</button>
+                </div>
             </div>
         </div>
-    </div>
+    </form>
 </div>
 
 <script>
@@ -116,6 +100,9 @@
 
     // Function to open modal
     function openModal() {
+        document.getElementById('categoryForm').action = "{{route('admin.addNewCategory')}}";
+        document.getElementById('categoryName').value = '';
+        document.getElementById('parentCategory').value = 0;
         modal.style.display = 'block';
     }
     // Function to close modal
@@ -127,6 +114,14 @@
         if (e.target == modal) {
             modal.style.display = 'none';
         }
+    }
+
+    function openModalWithData(id, title, topCategory){
+        document.getElementById('categoryForm').action = "{{route('admin.editCategory')}}";
+        document.getElementById('categoryId').value = id;
+        document.getElementById('categoryName').value = title;
+        document.getElementById('parentCategory').value = topCategory;
+        modal.style.display = 'block';
     }
 
 </script>

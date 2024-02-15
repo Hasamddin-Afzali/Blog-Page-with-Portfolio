@@ -56,7 +56,7 @@
                 <div class="text-xl font-bold mb-2 text-black">{{$post->title}}</div>
                 <div class="text-gray-500 text-sm mb-2">{{$post->created_at->format('F d, Y')}}</div>
                 <div class="text-blue-500 mb-2">{{$post->getRelation('category')->title}}</div>
-                <p class="text-gray-800">{{substr($post->body,0,100).'... '}} </p>
+                <p class="text-gray-800">{!! substr($post->short_description,0,100).'... '!!} </p>
             </div>
           </a>
         @endforeach

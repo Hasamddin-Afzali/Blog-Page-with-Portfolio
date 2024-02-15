@@ -9,7 +9,7 @@
         <div class="flex items-end justify-between flex-row bg-gray-200 p-4">
             <div class="w-full mx-2">
                 <label for="search" class="block text-gray-700 font-medium mb-2"><i class="fas fa-search"></i> Search</label>
-                <input type="text" id="search" name="search"class="w-full px-4 py-2 bg-gray-100 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"placeholder="Search...">
+                <input type="text" id="search" name="search" class="w-full px-4 py-2 bg-gray-100 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"placeholder="Search...">
             </div>
         </div>
 
@@ -25,27 +25,26 @@
                     </tr>
                 </thead>
                 <tbody>
+                @foreach($messages as $message)
                     <tr>
-                        <td class="border px-4 py-2">1</td>
-                        <td class="border px-4 py-2">Email</td>
-                        <td class="border px-4 py-2">Message</td>
+                        <td class="border px-4 py-2">{{$message->id}}</td>
+                        <td class="border px-4 py-2">{{$message->email}}</td>
+                        <td class="border px-4 py-2">{{$message->message}}</td>
                         <td class="border px-4 py-2">
-                            <a href="#" class="text-blue-500 rounded"><i class="fas fa-edit"></i> </a>  |   
-                            <a href="#" class="text-red-500 rounded"><i class="fas fa-trash-alt"></i> </a>
+                            <button type="button" onclick="openModal('{{addslashes($message->message)}}')" class="text-blue-500 rounded"><i class="fas fa-edit"></i> </button>  |
+                            <form action="{{route('admin.deleteMessage')}}" method="post">
+                                @csrf
+                                <input type="hidden" name="id" value="{{$message->id}}">
+                                <button onclick="return confirm('Are you sure to delete this message?')" class="text-red-500 rounded"><i class="fas fa-trash-alt"></i> </button>
+                            </form>
                         </td>
                     </tr>
+                @endforeach
                 </tbody>
             </table>
         </div>
-
         <!-- Pagination -->
-        <div class="flex justify-end mt-4">
-            <button class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded-l">Prev</button>
-            <button class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4">1</button>
-            <button class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4">2</button>
-            <button class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4">3</button>
-            <button class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4">Next</button>
-        </div>
+        {{$messages->links()}}
     </div>
 </div>
 
@@ -68,7 +67,7 @@
             </div>
             <div class="flex justify-end">
                 <button id="createUserBtn" class="bg-green-500 text-white px-4 py-2 rounded-md hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"><i class="fas fa-plus"></i> CreateUser</button>
-                <button id="closeModalBtn" class="bg-gray-300 text-gray-700 px-4 py-2 rounded-md hover:bg-gray-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 ml-4">Close</button>
+                <button id="closeModalBtn" onclick="closeModal()" class="bg-gray-300 text-gray-700 px-4 py-2 rounded-md hover:bg-gray-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 ml-4">Close</button>
             </div>
         </div>
     </div>
@@ -79,32 +78,17 @@
 <script>
     // Get modal element
     var modal = document.getElementById('addUserModal');
-    // Get button that opens the modal
-    var btn = document.getElementById("addUserBtn");
-    // Get close button
-    var closeBtn = document.getElementById('closeModalBtn');
-
-    // Listen for click on button
-    btn.addEventListener('click', openModal);
-    // Listen for click on close button
-    closeBtn.addEventListener('click', closeModal);
-    // Listen for click outside of modal
-    window.addEventListener('click', outsideClick);
 
     // Function to open modal
-    function openModal() {
+    function openModal(messageBody) {
+        document.getElementById('username').value = messageBody;
         modal.style.display = 'block';
     }
     // Function to close modal
     function closeModal() {
         modal.style.display = 'none';
     }
-    // Function to close modal if outside click
-    function outsideClick(e) {
-        if (e.target == modal) {
-            modal.style.display = 'none';
-        }
-    }
+
 
 </script>
 @endsection

@@ -14,17 +14,24 @@
             <div class=" md:w-full p-8">
                 <h2 class="text-xl text-gray-700 mb-7">Contact Us</h2>
                 <!-- Contact Form -->
-                <form action="#" method="post" class="space-y-4">
+                <form action="{{route('getContactMessage')}}" method="post" class="space-y-4">
+                    @csrf
                     <div class="mb-4">
-                        <label for="name" class="block text-gray-600">Name:</label>
+                        <label for="name" class="block text-gray-600">
+                            Name:<span class="text-red-600">{{$errors->first('name') ? '*':''}}</span>
+                        </label>
                         <input type="text" id="name" name="name" placeholder="Your Name" class="w-full px-4 py-2 border rounded-md focus:outline-none focus:border-blue-500">
                     </div>
                     <div class="mb-4">
-                        <label for="email" class="block text-gray-600">Email:</label>
+                        <label for="email" class="block text-gray-600">
+                            Email:<span class="text-red-600">{{$errors->first('email') ? '*':''}}</span>
+                        </label>
                         <input type="email" id="email" name="email" placeholder="Your Email" class="w-full px-4 py-2 border rounded-md focus:outline-none focus:border-blue-500">
                     </div>
                     <div class="mb-4">
-                        <label for="message" class="block text-gray-600">Message:</label>
+                        <label for="message" class="block text-gray-600">
+                            Message:<span class="text-red-600">{{$errors->first('message') ? '*':''}}</span>
+                        </label>
                         <textarea id="message" name="message" rows="4" class="w-full px-4 py-2 border rounded-md focus:outline-none focus:border-blue-500"></textarea>
                     </div>
                     <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-700 focus:outline-none focus:shadow-outline"> Submit </button>

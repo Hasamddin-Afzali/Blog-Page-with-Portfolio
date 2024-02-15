@@ -26,14 +26,14 @@
                                 <p class="text-blue-600 font-bold">Category: {{$post->getRelation('category')->title}}</p>
                             </div>
                             <!-- Blog Description -->
-                            <p class="text-gray-800"> {!!substr($post->body,0,100).'... '!!}</p>
-                            <a href="{{ 'blog/'.$post->id }}" class="text-blue-500">see more</a>
+                            <p class="text-gray-800"> {!! $post->short_description !!}</p>
+                            <a href="{{ route('singlePost', $post->id) }}" class="text-blue-500">see more</a>
                         </div>
                     </div>
                 @endforeach
-                {{$posts->links()}}
+                {{count($posts) != 0 ? $posts->links() : null}}
                 <!-- End From Database -->
-                
+
             </div>
             <!-- Right Column - Categories and Top Watched Blogs -->
             <div class="md:w-1/3 md:ml-8">

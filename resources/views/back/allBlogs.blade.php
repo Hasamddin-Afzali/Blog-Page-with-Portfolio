@@ -1,15 +1,6 @@
 @extends('back.layouts.master')
 @section('title', 'All Blogs')
 @section('content')
-    <script>
-        @if(Session::has('editPostSuccess'))
-            alert("{{'Post edited successfully.'}}");
-            {{Session::forget('editPostSuccess')}}
-        @elseif(Session::has('deletePostSuccess'))
-            alert("{{'Post deleted successfully.'}}");
-            {{Session::forget('deletePostSuccess')}}
-        @endif
-    </script>
 <div class="bg-gray-100">
     <div class="bg-white p-4 rounded-md shadow-md">
         <h2 class="text-lg font-semibold bg-gray-700 p-4 text-gray-300"><i class="fas fa-th-large text-green-500"></i> @yield('title')</h2>
@@ -68,39 +59,6 @@
                         </tr>
                     </form>
                 @endforeach
-                    <tr>
-                        <td class="border px-4 py-2">1</td>
-                        <td class="border px-4 py-2">Sample Title</td>
-                        <td class="border px-4 py-2">Sample Category</td>
-                        <td class="border px-4 py-2">Sample Content</td>
-                        <td class="border px-4 py-2">Sample Image</td>
-                        <td class="border px-4 py-2">
-                            <a href="#" class="text-blue-500 rounded"><i class="fas fa-edit"></i> </a>  |
-                            <a href="#" class="text-red-500 rounded"><i class="fas fa-trash-alt"></i> </a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="border px-4 py-2">1</td>
-                        <td class="border px-4 py-2">Sample Title</td>
-                        <td class="border px-4 py-2">Sample Category</td>
-                        <td class="border px-4 py-2">Sample Content</td>
-                        <td class="border px-4 py-2">Sample Image</td>
-                        <td class="border px-4 py-2">
-                            <a href="#" class="text-blue-500 rounded"><i class="fas fa-edit"></i> </a>  |
-                            <a href="#" class="text-red-500 rounded"><i class="fas fa-trash-alt"></i> </a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="border px-4 py-2">1</td>
-                        <td class="border px-4 py-2">Sample Title</td>
-                        <td class="border px-4 py-2">Sample Category</td>
-                        <td class="border px-4 py-2">Sample Content</td>
-                        <td class="border px-4 py-2">Sample Image</td>
-                        <td class="border px-4 py-2">
-                            <a href="#" class="text-blue-500 rounded"><i class="fas fa-edit"></i> </a>  |
-                            <a href="#" class="text-red-500 rounded"><i class="fas fa-trash-alt"></i> </a>
-                        </td>
-                    </tr>
                 </tbody>
             </table>
         </div>

@@ -36,12 +36,27 @@
                 <h3 class="text-xl font-bold mb-4">Related Blogs</h3>
                 <hr>
                 <ul class="my-4">
-                    <li class="mb-2"> <a href="#" class="text-blue-500">Top Blog 1</a> </li>
-                    <li class="mb-2"> <a href="#" class="text-blue-500">Top Blog 2</a> </li>
-                    <!-- Add more top watched blogs as needed -->
+                    {{\App\Http\Controllers\Controller::listBlogLinksByCategory($post[0]->getRelation('category')->id, $post[0]->id)}}
                 </ul>
             </div>
         </div>
     </div>
 </div>
+<script>
+    document.querySelectorAll('.toggle').forEach(item => {
+        item.addEventListener('click', event => {
+            let icon = item.querySelector('i');
+            let parent = event.target.closest('li');
+            let nestedList = parent.querySelector('ul');
+            nestedList.classList.toggle('hidden');
+            if (nestedList.classList.contains('hidden')) {
+                icon.classList.remove('fa-chevron-down');
+                icon.classList.add('fa-chevron-right');
+            } else {
+                icon.classList.remove('fa-chevron-right');
+                icon.classList.add('fa-chevron-down');
+            }
+        })
+    });
+</script>
 @endsection

@@ -1,12 +1,6 @@
 @extends('back.layouts.master')
 @section('title', 'All Users')
 @section('content')
-<script>
-        @if(Session::has('addUserSuccess'))
-            alert("{{'User added successfully.'}}");
-            {{Session::forget('addUserSuccess')}}
-        @endif
-    </script>
 <div class="bg-gray-100">
     <div class="bg-white p-4 rounded-md shadow-md">
         <h2 class="text-lg font-semibold bg-gray-700 p-4 text-gray-300"> <i class="fas fa-users text-green-500"></i> @yield('title') All Users</h2>
@@ -41,9 +35,11 @@
                         <td class="border px-4 py-2">{{$user->last_name}}</td>
                         <td class="border px-4 py-2">{{$user->email}}</td>
                         <td class="border px-4 py-2">
-                            <form action="">
-                            <button class="text-blue-500 rounded"><i class="fas fa-edit"></i> </button>  |   
-                            <button onclick="return confirm('Are You sure to delete')" class="text-red-500 rounded"><i class="fas fa-trash-alt"></i> </button>
+                            <button onclick="openModalWithData('{{$user->id}}', '{{$user->first_name}}', '{{$user->last_name}}', '{{$user->email}}')" class="text-blue-500 rounded"><i class="fas fa-edit"></i> </button>  |
+                            <form action="{{route('admin.deleteUser')}}" method="post">
+                                @csrf
+                                <input type="hidden" name="id" value="{{$user->id}}">
+                                <button onclick="return confirm('Are You sure to delete')" class="text-red-500 rounded"><i class="fas fa-trash-alt"></i> </button>
                             </form>
                         </td>
                     </tr>
@@ -53,13 +49,7 @@
         </div>
 
         <!-- Pagination -->
-        <div class="flex justify-end mt-4">
-            <button class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded-l">Prev</button>
-            <button class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4">1</button>
-            <button class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4">2</button>
-            <button class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4">3</button>
-            <button class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4">Next</button>
-        </div>
+        {{$users->links()}}
     </div>
 </div>
 
@@ -68,8 +58,9 @@
     <!-- Modal content -->
     <div class="flex items-center justify-center min-h-screen">
         <div class="bg-white p-6 rounded-lg shadow-xl w-96">
-            <form id="addUserForm" action="{{ route('admin.addNewUser') }}" method="POST">
+            <form id="userForm"  method="POST">
                 @csrf <!-- CSRF koruma tokeni -->
+                <input type="hidden" name="id" id="userId">
                 <div class="mb-4">
                     <label for="first_name" class="block text-gray-700 font-medium mb-2">First Name</label>
                     <input type="text" id="first_name" name="first_name" class="w-full px-4 py-2 bg-gray-100 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
@@ -94,8 +85,8 @@
                     </select>
                 </div>
                 <div class="flex justify-end">
-                    <button id="createUserBtn" class="bg-green-500 text-white px-4 py-2 rounded-md hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"><i class="fas fa-plus"></i> CreateUser</button>
-                    <button id="closeModalBtn" class="bg-gray-300 text-gray-700 px-4 py-2 rounded-md hover:bg-gray-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 ml-4">Close</button>
+                    <button type="submit" id="createUserBtn" class="bg-green-500 text-white px-4 py-2 rounded-md hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"></button>
+                    <button type="button" id="closeModalBtn" class="bg-gray-300 text-gray-700 px-4 py-2 rounded-md hover:bg-gray-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 ml-4">Close</button>
                 </div>
             </form>
         </div>
@@ -121,6 +112,12 @@
 
     // Function to open modal
     function openModal() {
+        document.getElementById('userForm').action = '{{route('admin.addNewUser')}}'
+        document.getElementById('createUserBtn').innerHTML = '<i class="fas fa-plus"></i> Create User';
+        document.getElementById('first_name').value = '';
+        document.getElementById('last_name').value = '';
+        document.getElementById('email').value = '';
+        document.getElementById('password').value = '';
         modal.style.display = 'block';
     }
     // Function to close modal
@@ -132,6 +129,17 @@
         if (e.target == modal) {
             modal.style.display = 'none';
         }
+    }
+
+    function openModalWithData(id, firstName, lastName, email){
+        document.getElementById('userForm').action = '{{route('admin.editUser')}}'
+        document.getElementById('createUserBtn').innerHTML = '<i class="fas fa-save"></i> Save';
+        document.getElementById('userId').value = id;
+        document.getElementById('first_name').value = firstName;
+        document.getElementById('last_name').value = lastName;
+        document.getElementById('email').value = email;
+        document.getElementById('password').value = '';
+        modal.style.display = 'block';
     }
 
 </script>

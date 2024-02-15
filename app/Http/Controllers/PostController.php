@@ -11,30 +11,31 @@ use Illuminate\View\View;
 
 class PostController extends Controller
 {
-    public function allBlogs(): View
+    public function allBlogs()
     {
-        $data['posts'] = Post::where('isDeleted', 0)
-            ->with('category')->with('createdBy')->paginate(3);
-        $data['categories'] = [];
-        $this->treeViewCategories($data['categories']);
-        return view('back.allBlogs', $data);
-    }
-    private function treeViewCategories(&$array, $topId = 0, $level = 0)
-    {
-        $categories = Category::where('isDeleted', 0)->where('top_category', $topId)->get();
-        foreach ($categories as $category){
-            $category->title = str_repeat("-", $level).' '.$category->title;
-            array_push($array, $category);
-            $this->treeViewCategories($array, $category->id, $level+2);
+        try {
+            $data['posts'] = Post::where('isDeleted', 0)
+                ->with('category')->with('createdBy')->paginate(15);
+            $data['categories'] = [];
+            CategoryController::treeViewCategories($data['categories']);
+            return view('back.allBlogs', $data);
+        }catch (\Exception $e){
+            toastr()->error('Something went wrong! '.$e->getMessage());
+            return redirect()->back();
         }
     }
 
-    public function newPost(): View
+    public function newPost()
     {
-        $data['edit'] = false;
-        $data['categories'] = [];
-        $this->treeViewCategories($data['categories']);
-        return view('back.blogs', $data);
+        try {
+            $data['edit'] = false;
+            $data['categories'] = [];
+            CategoryController::treeViewCategories($data['categories']);
+            return view('back.blogs', $data);
+        }catch (\Exception $e){
+            toastr()->error('Something went wrong! '.$e->getMessage());
+            return redirect()->back();
+        }
     }
 
 
@@ -47,49 +48,61 @@ class PostController extends Controller
             'shortDescription' => 'required',
             'postContent' => 'required'
         ]);
+        try {
+            $directoryPath = '/public/img/postHeaders';
+            $image = $request->file('image');
 
-        $directoryPath = '/public/img/postHeaders';
-        $image = $request->file('image');
+            if(!Storage::exists($directoryPath))
+                Storage::makeDirectory($directoryPath);
+            $imagePath = '/storage'.substr(Storage::putFile($directoryPath, $image),6);// 6: public => storage
 
-        if(!Storage::exists($directoryPath))
-            Storage::makeDirectory($directoryPath);
-        $imagePath = '/storage'.substr(Storage::putFile($directoryPath, $image),6);// 6: public => storage
-
-        Post::create([
-            'title'=>$request->title,
-            'category'=>$request->category,
-            'img_path'=> $imagePath,
-            'short_description'=>$request->shortDescription,
-            'body'=>$request->postContent,
-            'created_by'=>Auth::user()->id,
-            'created_at'=>now()
-        ]);
-
-        return redirect()->back()->with('addPostSuccess');
+            Post::create([
+                'title'=>$request->title,
+                'category'=>$request->category,
+                'img_path'=> $imagePath,
+                'short_description'=>$request->shortDescription,
+                'body'=>$request->postContent,
+                'created_by'=>Auth::user()->id,
+                'created_at'=>now()
+            ]);
+            toastr()->success('Blog post has been shared successfully.');
+        }catch (\Exception $e){
+            toastr()->error('Something went wrong! '.$e->getMessage());
+        }
+        return redirect()->back();
     }
 
     public function editPostPage(Request $request)
     {
         if($request->action == "Update") {
-            $data['edit'] = true;
-            $post = json_decode($request->post);
-            //dd($request->post);
-            $data['id'] = $post->id;
-            $data['title'] = $post->title;
-            $data['categoryId'] = $post->category->id;
-            $data['description'] = $post->short_description;
-            $data['imagePath'] = $post->img_path;
-            $data['postContent'] = $post->body;
-            $data['categories'] = Category::where('isDeleted', 0)->get();
-            return view('back.blogs', $data);
+            try {
+                $data['edit'] = true;
+                $post = json_decode($request->post);
+                $data['id'] = $post->id;
+                $data['title'] = $post->title;
+                $data['categoryId'] = $post->category->id;
+                $data['description'] = $post->short_description;
+                $data['imagePath'] = $post->img_path;
+                $data['postContent'] = $post->body;
+                $data['categories'] = Category::where('isDeleted', 0)->get();
+                return view('back.blogs', $data);
+            }catch (\Exception $e){
+                toastr()->error('Something went wrong! '.$e->getMessage());
+                return redirect()->back();
+            }
         }
         else{
-            $id = json_decode($request->post)->id;
-            $post = Post::where('id', $id)->get()[0];
-            $post->isDeleted = 1;
-            $post->deleted_by = Auth::user()->id;
-            $post->save();
-            return redirect()->back()->with('deletePostSuccess');
+            try {
+                $id = json_decode($request->post)->id;
+                $post = Post::where('id', $id)->get()[0];
+                $post->isDeleted = 1;
+                $post->deleted_by = Auth::user()->id;
+                $post->save();
+                toastr()->success('The post has been deleted successfully.');
+            }catch (\Exception $e){
+                toastr()->error('Something went wrong! '.$e->getMessage());
+            }
+            return redirect()->back();
         }
 
     }
@@ -103,25 +116,29 @@ class PostController extends Controller
             'shortDescription' => 'required',
             'postContent' => 'required'
         ]);
+        try {
+            $imagePath = $request->imagePath;
+            if($request->hasFile('image')){
+                $directoryPath = '/public/img/postHeaders';
+                $image = $request->file('image');
+                if(!Storage::exists($directoryPath))
+                    Storage::makeDirectory($directoryPath);
+                $imagePath = '/storage'.substr(Storage::putFile($directoryPath, $image),6);
+            }
 
-        $imagePath = $request->imagePath;
-        if($request->hasFile('image')){
-            $directoryPath = '/public/img/postHeaders';
-            $image = $request->file('image');
-            if(!Storage::exists($directoryPath))
-                Storage::makeDirectory($directoryPath);
-            $imagePath = '/storage'.substr(Storage::putFile($directoryPath, $image),6);
+            $post = Post::where('id', $request->id)->get()[0];
+
+            $post->title =$request->title;
+            $post->category = $request->category;
+            $post->img_path = $imagePath;
+            $post->short_description = $request->shortDescription;
+            $post->body = $request->postContent;
+            $post->updated_by = Auth::user()->id;
+            $post->save();
+            toastr()->success('The change has been implemented successfully.');
+        }catch (\Exception $e){
+            toastr()->error('Something went wrong! '.$e->getMessage());
         }
-
-        $post = Post::where('id', $request->id)->get()[0];
-
-        $post->title =$request->title;
-        $post->category = $request->category;
-        $post->img_path = $imagePath;
-        $post->short_description = $request->shortDescription;
-        $post->body = $request->postContent;
-        $post->updated_by = Auth::user()->id;
-        $post->save();
-        return redirect()->route('admin.blog')->with('editPostSuccess');
+        return redirect()->route('admin.blog');
     }
 }

@@ -14,4 +14,9 @@ class Category extends Model
         'created_by',
         'created_at'
     ];
+
+    public function topCategory()
+    {
+        return $this->belongsTo(Category::class, 'top_category');
+    }
 }

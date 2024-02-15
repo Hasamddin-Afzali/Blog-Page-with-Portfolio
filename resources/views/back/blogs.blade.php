@@ -2,18 +2,11 @@
 @section('title', $edit ? 'Edit Blog' : 'Add Blog')
 @section('content')
 <div class="flex-1 ">
-    <script>
-        @if(Session::has('addPostSuccess'))
-            alert("{{'Post added successfully.'}}");
-            {{Session::forget('addPostSuccess')}}
-        @endif
-    </script>
     <!-- Add Blog Form -->
     <div class="bg-white p-4 rounded-md shadow-md">
         <h2 class="text-lg font-semibold bg-gray-700 p-4 text-gray-300"><i class="fas fa-file-alt text-green-500"></i>
             @yield('title')</h2>
         <!-- Blog Form Content -->
-        {{$edit}}
         <form action="{{$edit ? route('admin.editPost') : route('admin.addNewPost')}}" method="POST" class="bg-gray-100 p-4" enctype="multipart/form-data">
             @csrf
             @if($edit)
@@ -38,10 +31,6 @@
                         value="{{$category->id}}">{{$category->title}}
                     </option>
                     @endforeach
-                    <option value="technology">Technology</option>
-                    <option value="fashion">Fashion</option>
-                    <option value="food">Food</option>
-                    <!-- Add more options as needed -->
                 </select>
             </div>
             <div class="mb-4">

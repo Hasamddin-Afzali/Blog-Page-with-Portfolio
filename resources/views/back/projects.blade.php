@@ -19,7 +19,7 @@
         <h2 class="text-lg font-semibold bg-gray-700 p-4 text-gray-300"> <i class="fas fa-project-diagram text-green-500"></i> @yield('title') </h2>
         <!-- Filter and Search -->
         <div class="flex items-end justify-between flex-row bg-gray-200 p-4">
-            
+
             <div class="w-3/4 mx-2">
                 <label for="search" class="block text-gray-700 font-medium mb-2"><i class="fas fa-search"></i> Search</label>
                 <input type="text" id="search" name="search"class="w-full px-4 py-2 bg-gray-100 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500" placeholder="Search...">
@@ -43,7 +43,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    
+
                     @foreach($projects as $project)
                         <?php
                         $id = $project->id;
@@ -57,7 +57,6 @@
                         <td class="border px-4 py-2">{{$description}}</td>
                         <td class="border px-4 py-2"><a href="{{$project->link}}">{{$link}}</a> </td>
                         <td class="border px-4 py-2">
-                            <!-- <button id="editProjectBtn" onclick="openModelWithData(1, 'başlık', 'açıklama', 'link')" class="text-blue-500 rounded"><i class="fas fa-edit"></i> </button> -->
                             <button id="editProjectBtn"
                                     onclick="openModelWithData('{{$id}}', '{{addslashes($title)}}', '{{addslashes($description)}}', '{{$link}}')"
                                     class="text-blue-500 rounded"><i class="fas fa-edit"></i>
@@ -75,20 +74,9 @@
         </div>
 
         <!-- Pagination -->
-        <div class="flex justify-end mt-4">
-            <button class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded-l">Prev</button>
-            <button class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4">1</button>
-            <button class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4">2</button>
-            <button class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4">3</button>
-            <button class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4">Next</button>
-        </div>
+        {{count($projects) != 0 ? $projects->links() : null}}
     </div>
 </div>
-@if(Session::has('addProjectSuccess'))
-    {{'var'}}
-@else
-    {{'yok'}}
-@endif
 <!-- Modal for adding project -->
 <form id="projectModal" method="post">
     @csrf
