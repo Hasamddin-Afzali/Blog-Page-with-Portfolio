@@ -34,79 +34,85 @@ class Controller extends BaseController
         try {
             $posts = Post::where('isDeleted', 0)
                 ->with('category')->with('createdBy')
-                ->orderBy('created_at', 'desc')->paginate(5);
+                ->orderBy('created_at', 'desc')->paginate(10);
         }catch (\Exception $e){
             $posts = [];
         }
         return view('front.blog', compact('posts'));
     }
 
-    public static function listCategories($top = 0): void
-    {
-        try{
-            $categories = Category::where('top_category', $top)->where('isDeleted',0)->get();
-            if($top != 0)
-                echo  '<ul class="ml-4 hidden">';
+    public static function listCategories($top = 0): bool
+{
+    try {
+        $categories = Category::where('top_category', $top)->where('isDeleted', 0)->get();
+        if ($categories->isEmpty()) {
+            return false;
+        }
+
+        echo '<ul class="ms-4 list-unstyled">';
+        foreach ($categories as $category) {
+            $subCount = Category::where('top_category', $category->id)->count();
+            echo '<li class="mb-2 list-unstyled">';
+            if ($subCount > 0)
+                echo '<div class="d-flex align-items-center">
+                        <span class="toggle text-primary cursor-pointer me-2"><i class="fas fa-chevron-right"></i></span>';
+            echo '<a href="' . URL::to('blog/category?id=' . $category->id) . '" class="text-primary">' . $category->title . '</a>';
+            if ($subCount > 0) {
+                echo '</div>';
+                self::listCategories($category->id);
+            }
+            echo '</li>';
+        }
+        echo '</ul>';
+
+        return true;
+    } catch (\Exception $e) {
+        return false;
+    }
+}
+
+
+
+    public static function listCategories2($top = 0, $root = 0, $writeTop = false): void
+{
+    try {
+        if ($writeTop) {
+            $topCategory = Category::where('id', $top)->first();
+            $subCount = Category::where('top_category', $topCategory->id)->count();
+            echo '<li class="mb-2">';
+            if ($subCount > 0)
+                echo '<div class="d-flex align-items-center">
+                        <span class="toggle text-primary cursor-pointer mr-2"><i class="fas fa-chevron-right text-sm"></i></span>';
+            echo '<a href="' . URL::to('blog/category?id=' . $topCategory->id) . '" class="text-primary">' . $topCategory->title . '</a>';
+            if ($subCount > 0) {
+                echo '</div>';
+                self::listCategories($topCategory->id, $root);
+            }
+            echo '</li>';
+        } else {
+            $categories = Category::where('top_category', $top)->where('isDeleted', 0)->get();
+            if ($top != $root)
+                echo '<ul class="ms-4 hidden">';
             foreach ($categories as $category) {
                 $subCount = Category::where('top_category', $category->id)->count();
                 echo '<li class="mb-2">';
-                if($subCount > 0)
-                    echo '<div class="flex items-center">
-                            <span class="toggle text-blue-500 cursor-pointer mr-2"><i class="fas fa-chevron-right text-sm"></i></span>';
-                echo '<a href="'.URL::to('blog/category?id='.$category->id).'" class="text-blue-500">'.$category->title.'</a>';
-                if($subCount > 0){
+                if ($subCount > 0)
+                    echo '<div class="d-flex align-items-center">
+                            <span class="toggle text-primary cursor-pointer mr-2"><i class="fas fa-chevron-right text-sm"></i></span>';
+                echo '<a href="' . URL::to('blog/category?id=' . $category->id) . '" class="text-primary">' . $category->title . '</a>';
+                if ($subCount > 0) {
                     echo '</div>';
-                    self::listCategories($category->id);
+                    self::listCategories($category->id, $root);
                 }
-
                 echo '</li>';
             }
-            if($top != 0)
-                echo '</ul>';
-        }catch (\Exception $e){}
+        }
+        if ($top != 0)
+            echo '</ul>';
+    } catch (\Exception $e) {
     }
+}
 
-    public static function listCategories2($top = 0, $root = 0, $writeTop = false): void
-    {
-        try{
-            if($writeTop){
-                $topCategory = Category::where('id', $top)->get()[0];
-                $subCount = Category::where('top_category', $topCategory->id)->count();
-                echo '<li class="mb-2">';
-                if($subCount > 0)
-                    echo '<div class="flex items-center">
-                            <span class="toggle text-blue-500 cursor-pointer mr-2"><i class="fas fa-chevron-right text-sm"></i></span>';
-                echo '<a href="'.URL::to('blog/category?id='.$topCategory->id).'" class="text-blue-500">'.$topCategory->title.'</a>';
-                if($subCount > 0){
-                    echo '</div>';
-                    self::listCategories($topCategory->id, $root);
-                }
-
-                echo '</li>';
-            }
-            else{
-                $categories = Category::where('top_category', $top)->where('isDeleted',0)->get();
-                if($top != $root)
-                    echo  '<ul class="ml-4 hidden">';
-                foreach ($categories as $category) {
-                    $subCount = Category::where('top_category', $category->id)->count();
-                    echo '<li class="mb-2">';
-                    if($subCount > 0)
-                        echo '<div class="flex items-center">
-                            <span class="toggle text-blue-500 cursor-pointer mr-2"><i class="fas fa-chevron-right text-sm"></i></span>';
-                    echo '<a href="'.URL::to('blog/category?id='.$category->id).'" class="text-blue-500">'.$category->title.'</a>';
-                    if($subCount > 0){
-                        echo '</div>';
-                        self::listCategories($category->id, $root);
-                    }
-
-                    echo '</li>';
-                }
-            }
-            if($top != 0)
-                echo '</ul>';
-        }catch (\Exception $e){}
-    }
 
     private static function getSubCategoryIds(int $id, array &$ids)
     {

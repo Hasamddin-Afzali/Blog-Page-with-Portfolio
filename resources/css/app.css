@@ -1,5 +1,12 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
 @import '~@fortawesome/fontawesome-free/css/all.css';
+
+.bg-black{
+    background-color: black !important;
+}
+.navbar-nav .nav-link {
+    transition: color 0.5s ease;
+}
+
+.navbar-nav .nav-link:hover {
+    color: #FBA919 !important;
+}

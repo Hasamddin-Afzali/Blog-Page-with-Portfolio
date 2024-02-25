@@ -1,257 +1,155 @@
 @extends('front.layouts.master')
 @section('title', 'Home')
 @section('content')
-    <!-- header starts here  -->
-    <header class="bg-cover bg-center h-screen flex items-center text-white bg-no-repeat relative" style="width:100%;height:300px;background-image: url('https://mdbcdn.b-cdn.net/img/new/slides/146.webp');">
-        <div class="absolute inset-0 bg-black bg-opacity-50"></div>
-        <div class="container mx-auto text-center relative z-10">
-            <h1 class="text-5xl font-bold mb-4"><span class="text-red-500">Portfolio</span></h1>
+<!-- header starts here  -->
+<header class="bg-cover bg-center h-screen d-flex align-items-center text-white bg-no-repeat position-"
+    style="background-image: url('/img/programming-skills.png');">
+    <div class="position-absolute inset-0 bg-black opacity-50"></div>
+    <div class="container mx-auto text-center position-relative z-index-10">
+        <h1 class="py-5"><span class="text-warning">Portfolio</span></h1>
+    </div>
+</header>
+
+<!-- header ends here -->
+<div class="container-md mx-auto py-5">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="about p-4 shadow-md" data-aos="fade-right" data-aos-delay="200">
+                <h1 class="text-3xl font-bold mb-4">About Me</h1>
+                <hr>
+                <p class="py-4">About Me Hello! I'm Hasamuddin Afzali, a passionate computer engineer, full-stack web
+                    developer, and graphic designer based in Karabuk, Turkey. With a keen eye for detail and a love for
+                    creative problem-solving, I thrive in the dynamic intersection of technology and design.</p>
+                <h2 class="text-3xl">Education & Experience</h2>
+                <p class="py-4">I am currently pursuing my Bachelor's degree in Computer Engineering, specializing in
+                    cutting-edge
+                    technologies and software development practices. Prior to this, I earned my Associate Degree in Computer
+                    Programming, where I honed my skills and laid the groundwork for my journey into the world of
+                    technology.
+
+                    Alongside my academic pursuits, I have immersed myself in the world of freelance web development and
+                    graphic design. Leveraging my expertise in HTML, CSS, JavaScript, Bootstrap, jQuery, Tailwind CSS,
+                    React, C#, and Laravel, I craft bespoke digital solutions that not only meet but exceed my clients'
+                    expectations.</p>
+            </div>
         </div>
-    </header>
-    <!-- header ends here -->
-    <div class="md:container md:mx-auto md:w-3/4">
-        <div class="py-10">
-            <div class="flex flex-col md:flex-row justify-between">
-                <div class="about-me md:w-3/6 p-5">
-                    <div class="title">
-                        <h2>Your Name</h2>
-                        <span>Web Developer</span>
-                        <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ducimus, voluptatibus rem est ipsa, odit voluptate molestiae iure suscipit labore iste placeat incidunt aut enim aspernatur fugit velit, laborum sed quisquam?</p>
-                        <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ducimus, voluptatibus rem est ipsa, odit voluptate molestiae iure suscipit labore iste placeat incidunt aut enim aspernatur fugit velit, laborum sed quisquam?</p>
+        <div class="col-md-6">
+            <div class="about p-4 shadow-md">
+                <h2 class="text-3xl font-bold mb-4">Skills</h2>
+                <hr>
+                <div class="my-4" data-aos="fade-right" data-aos-delay="100">
+                    <div class="d-flex justify-content-between py-1">
+                        <span class="text-base text-muted font-semibold">Photoshop & Illustrator</span>
+                        <span class="text-base font-semibold">80%</span>
+                    </div>
+                    <div class="progress my-2">
+                        <div class="progress-bar bg-warning" role="progressbar" style="width: 80%;" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
                     </div>
                 </div>
-                <div class="my-picture md:w-3/6 mx-5">
-                    <img src="https://mdbcdn.b-cdn.net/img/new/slides/146.webp" class="rounded-3xl" alt="">
+
+                <div class="my-4" data-aos="fade-right" data-aos-delay="100">
+                    <div class="d-flex justify-content-between py-1">
+                        <span class="text-base text-muted font-semibold">HTML & CSS</span>
+                        <span class="text-base font-semibold">90%</span>
+                    </div>
+                    <div class="progress my-2">
+                        <div class="progress-bar bg-warning" role="progressbar" style="width: 90%;" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                </div>
+
+                <div class="my-4" data-aos="fade-right" data-aos-delay="100">
+                    <div class="d-flex justify-content-between py-1">
+                        <span class="text-base text-muted font-semibold">JavaScript</span>
+                        <span class="text-base font-semibold">60%</span>
+                    </div>
+                    <div class="progress my-2">
+                        <div class="progress-bar bg-warning" role="progressbar" style="width: 60%;" aria-valuenow="60"
+                            aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                </div>
+
+                <div class="my-4" data-aos="fade-right" data-aos-delay="100">
+                    <div class="d-flex justify-content-between py-1">
+                        <span class="text-base text-muted font-semibold">PHP & Laravel</span>
+                        <span class="text-base font-semibold">75%</span>
+                    </div>
+                    <div class="progress my-2">
+                        <div class="progress-bar bg-warning" role="progressbar" style="width: 75%;" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                </div>
+
+                <div class="my-4" data-aos="fade-right" data-aos-delay="100">
+                    <div class="d-flex justify-content-between py-1">
+                        <span class="text-base text-muted font-semibold">MySQL</span>
+                        <span class="text-base font-semibold">60%</span>
+                    </div>
+                    <div class="progress my-2">
+                        <div class="progress-bar bg-warning" role="progressbar" style="width: 60%;" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-    <div class="container mx-auto flex w-3/4 py-8">
+</div>
 
-<!-- Left Column - Project Showcase -->
-<div class=" w-1/2">
+<div class="container-md mx-auto py-5" data-aos="fade-right" data-aos-delay="200">
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+        <div class="col mb-4 d-flex">
+            <div class="about-me p-5 bg-light shadow-md d-flex flex-column justify-content-between">
+                <div class="title">
+                    <h1 class="text-3xl my-4">Creative Passion</h1>
+                    <p>Graphic design isn't just a skill set for me; it's a passion. I'm proficient in Adobe Photoshop
+                        and Illustrator, allowing me to bring concepts to life with stunning visuals and captivating
+                        designs. Whether it's designing sleek logos, eye-catching branding materials, or engaging user
+                        interfaces, I thrive on transforming ideas into visually compelling realities.</p>
+                </div>
+                <div class="footer mt-auto">
+                </div>
+            </div>
+        </div>
+        <div class="col mb-4 d-flex">
+            <div class="about-me p-5 bg-light shadow-md d-flex flex-column justify-content-between">
+                <div class="title">
+                    <h1 class="text-3xl my-4">Why Work With Me?</h1>
+                    <p>I approach every project with enthusiasm, professionalism, and a commitment to excellence. My
+                        goal is not only to deliver high-quality solutions but also to establish lasting relationships
+                        built on trust, communication, and mutual respect. From concept to execution, I collaborate
+                        closely with my clients to ensure that their vision is brought to life in a way that resonates
+                        with their audience and achieves their goals.</p>
+                </div>
+                <div class="footer mt-auto">
+                </div>
+            </div>
+        </div>
+        <div class="col mb-4 d-flex">
+            <div class="about-me p-5 bg-light shadow-md d-flex flex-column justify-content-between">
+                <div class="title">
+                    <h1 class="text-3xl my-4">Let's Connect</h1>
+                    <p>If you're looking for a dedicated and versatile professional to help bring your digital projects
+                        to fruition, I'd love to hear from you! Feel free to reach out and let's discuss how we can
+                        collaborate to turn your ideas into reality.</p>
+                </div>
+                <div class="footer mt-auto">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
-    <!-- Column 1 - Project Showcase -->
-    <div class="w-1/2 p-4">
-        <h2 class="text-3xl font-bold mb-4">Project Showcase</h2><hr>
 
+
+<div class="container py-5">
+    <h2 class="text-center text-3xl font-bold mb-4">My Projects</h2>
+    <hr>
+    <div class="row justify-content-around">
         @foreach($projects as $project)
-            <div class="mb-8">
-                <h3 class="text-xl font-bold mb-2">{{$project->title}}</h3>
-                <p class="text-gray-600 mb-4">{{$project->description}}</p>
-                <a href="{{$project->link}}" class="bg-blue-500 text-white py-2 px-4 rounded">Learn More</a>
-                <!-- <button class="bg-blue-500 text-white py-2 px-4 rounded">Learn More</button> -->
-            </div>
+        <div class="col-md-5 mb-4 bg-light p-4 mx-2 shadow-sm" data-aos="fade-left" data-aos-delay="200">
+            <h3 class="text-2xl">{{$project->title}}</h3>
+            <p class="text-muted mb-4">{{$project->description}}</p>
+            <a href="{{$project->link}}" class="btn btn-warning text-white">Learn More</a>
+        </div>
         @endforeach
-
-        <!-- Project 1 -->
-        <div class="mb-8">
-            <h3 class="text-xl font-bold mb-2">Project Title 1</h3>
-            <p class="text-gray-600 mb-4">Description of Project 1. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-            <button class="bg-blue-500 text-white py-2 px-4 rounded">Learn More</button>
-        </div>
-
-
-        <!-- Add more projects as needed -->
-
     </div>
-
-    <!-- Column 2 - Project Showcase -->
-    <div class="w-1/2 p-4">
-        <!-- Project 2 -->
-        <div class="mb-8">
-            <h3 class="text-xl font-bold mb-2">Project Title 2</h3>
-            <p class="text-gray-600 mb-4">Description of Project 2. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-            <button class="bg-blue-500 text-white py-2 px-4 rounded">Learn More</button>
-        </div>
-
-        <!-- Add more projects as needed -->
-
-    </div>
-
 </div>
 
-<!-- Right Column - Skills -->
-<div class="w-1/2 p-4">
-    <h2 class="text-3xl font-bold mb-4">Skills</h2><hr>
-
-    <!-- Skill 1 - HTML5 -->
-    <div class="mb-4">
-        <p class="text-lg font-semibold mb-2">HTML5</p>
-        <div class="flex items-center">
-            <div class="bg-gray-200 h-4 w-3/4 rounded">
-                <div class="bg-blue-500 h-full rounded"></div>
-            </div>
-            <span class="ml-2">75%</span>
-        </div>
-    </div>
-
-    <!-- Skill 2 - CSS3 -->
-    <div class="mb-4">
-        <p class="text-lg font-semibold mb-2">CSS3</p>
-        <div class="flex items-center">
-            <div class="bg-gray-200 h-4 w-2/4 rounded">
-                <div class="bg-green-500 h-full rounded"></div>
-            </div>
-            <span class="ml-2">50%</span>
-        </div>
-    </div>
-
-    <!-- Skill 3 - JavaScript -->
-    <div class="mb-4">
-        <p class="text-lg font-semibold mb-2">JavaScript</p>
-        <div class="flex items-center">
-            <div class="bg-gray-200 h-4 w-1/4 rounded">
-                <div class="bg-yellow-500 h-full rounded"></div>
-            </div>
-            <span class="ml-2">25%</span>
-        </div>
-    </div>
-
-    <!-- Add more skills as needed -->
-
-</div>
-
-</div>
-    <section class="items-center py-16 bg-gray-100 font-poppins dark:bg-gray-800">
-        <div class="justify-center max-w-6xl px-4 py-4 mx-auto lg:py-8 md:px-6">
-            <div class="max-w-xl mx-auto">
-                <div class="text-center ">
-                    <div class="relative flex flex-col items-center">
-                        <div class="absolute hidden md:block -top-14 left-0 text-[120px] text-gray-400 font-bold opacity-10"> TIMELINE </div>
-                        <h1 class="text-5xl font-bold leading-tight dark:text-white"> Company <span class="text-blue-500"> Timeline </span> </h1>
-                        <div class="flex mt-1 mb-10 overflow-hidden rounded w-14">
-                            <div class="flex-1 h-2 bg-blue-200"> </div>
-                            <div class="flex-1 h-2 bg-blue-400"> </div>
-                            <div class="flex-1 h-2 bg-blue-600"> </div>
-                        </div>
-                    </div>
-                    <p class="mb-16 text-base text-center text-gray-500"> Lorem ipsum, dolor sit amet consectetur adipisicing elit. Delectus magni eius eaque? Pariatur numquam, odio quod nobis ipsum ex cupiditate? </p>
-                </div>
-            </div>
-            <div class="w-full mx-auto lg:max-w-3xl">
-                <div class="relative flex justify-between">
-                    <div class="hidden py-3 w-14 md:block ">
-                        <h2 class="text-base font-medium text-gray-700 dark:text-gray-400">Step 1</h2>
-                    </div>
-                    <div class="flex flex-col items-center w-10 mr-4 md:w-24">
-                        <div>
-                            <div
-                                class="flex items-center justify-center w-10 h-10 border border-blue-500 rounded-full dark:border-blue-400">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                                    class="w-4 h-4 text-blue-500 dark:text-blue-400 bi bi-building" viewBox="0 0 16 16">
-                                    <path fill-rule="evenodd"
-                                        d="M14.763.075A.5.5 0 0 1 15 .5v15a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5V14h-1v1.5a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5V10a.5.5 0 0 1 .342-.474L6 7.64V4.5a.5.5 0 0 1 .276-.447l8-4a.5.5 0 0 1 .487.022zM6 8.694 1 10.36V15h5V8.694zM7 15h2v-1.5a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 .5.5V15h2V1.309l-7 3.5V15z">
-                                    </path>
-                                    <path d="M2 11h1v1H2v-1zm2 0h1v1H4v-1zm-2 2h1v1H2v-1zm2 0h1v1H4v-1zm4-4h1v1H8V9zm2 0h1v1h-1V9zm-2 2h1v1H8v-1zm2 0h1v1h-1v-1zm2-2h1v1h-1V9zm0 2h1v1h-1v-1zM8 7h1v1H8V7zm2 0h1v1h-1V7zm2 0h1v1h-1V7zM8 5h1v1H8V5zm2 0h1v1h-1V5zm2 0h1v1h-1V5zm0-2h1v1h-1V3z"> </path>
-                                </svg>
-                            </div>
-                        </div>
-                        <div class="w-px h-full bg-blue-300"></div>
-                    </div>
-                    <div class="relative flex-1 mb-10 bg-white rounded shadow lg:mb-8 dark:bg-gray-900">
-                        <div class="absolute inline-block w-4 overflow-hidden -translate-y-1/2 top-7 -left-4">
-                            <div class="hidden h-10 origin-top-right transform -rotate-45 bg-blue-600 dark:bg-blue-500 lg:block drop-shadow-lg"> </div>
-                        </div>
-                        <div class="relative z-20 p-6">
-                            <div class="absolute -top-4 -left[-30px]  lg:top-0 lg:left-0 inline-block px-2 py-2.5  dark:bg-blue-500 bg-blue-600 rounded-md lg:rounded-br-md lg:rounded-tl-md">
-                                <span class="text-xs text-gray-100">2013-10-03</span>
-                            </div>
-                            <p class="mt-4 mb-2 text-xl font-bold text-gray-600 lg:mt-8 dark:text-gray-400"> Website Launched </p>
-                            <p class="text-gray-700 dark:text-gray-500"> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                <div class="relative flex justify-between">
-                    <div class="hidden py-3 w-14 md:block ">
-                        <h2 class="text-base font-medium text-gray-700 dark:text-gray-400">Step 2</h2>
-                    </div>
-                    <div class="flex flex-col items-center w-10 mr-4 md:w-24">
-                        <div>
-                            <div class="flex items-center justify-center w-10 h-10 border border-blue-500 rounded-full dark:border-blue-400">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                                    class="w-4 h-4 text-blue-500 dark:text-blue-400 bi bi-globe" viewBox="0 0 16 16">
-                                    <path d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm7.5-6.923c-.67.204-1.335.82-1.887 1.855A7.97 7.97 0 0 0 5.145 4H7.5V1.077zM4.09 4a9.267 9.267 0 0 1 .64-1.539 6.7 6.7 0 0 1 .597-.933A7.025 7.025 0 0 0 2.255 4H4.09zm-.582 3.5c.03-.877.138-1.718.312-2.5H1.674a6.958 6.958 0 0 0-.656 2.5h2.49zM4.847 5a12.5 12.5 0 0 0-.338 2.5H7.5V5H4.847zM8.5 5v2.5h2.99a12.495 12.495 0 0 0-.337-2.5H8.5zM4.51 8.5a12.5 12.5 0 0 0 .337 2.5H7.5V8.5H4.51zm3.99 0V11h2.653c.187-.765.306-1.608.338-2.5H8.5zM5.145 12c.138.386.295.744.468 1.068.552 1.035 1.218 1.65 1.887 1.855V12H5.145zm.182 2.472a6.696 6.696 0 0 1-.597-.933A9.268 9.268 0 0 1 4.09 12H2.255a7.024 7.024 0 0 0 3.072 2.472zM3.82 11a13.652 13.652 0 0 1-.312-2.5h-2.49c.062.89.291 1.733.656 2.5H3.82zm6.853 3.472A7.024 7.024 0 0 0 13.745 12H11.91a9.27 9.27 0 0 1-.64 1.539 6.688 6.688 0 0 1-.597.933zM8.5 12v2.923c.67-.204 1.335-.82 1.887-1.855.173-.324.33-.682.468-1.068H8.5zm3.68-1h2.146c.365-.767.594-1.61.656-2.5h-2.49a13.65 13.65 0 0 1-.312 2.5zm2.802-3.5a6.959 6.959 0 0 0-.656-2.5H12.18c.174.782.282 1.623.312 2.5h2.49zM11.27 2.461c.247.464.462.98.64 1.539h1.835a7.024 7.024 0 0 0-3.072-2.472c.218.284.418.598.597.933zM10.855 4a7.966 7.966 0 0 0-.468-1.068C9.835 1.897 9.17 1.282 8.5 1.077V4h2.355z"> </path>
-                                </svg>
-                            </div>
-                        </div>
-                        <div class="w-px h-full bg-blue-300"></div>
-                    </div>
-                    <div class="relative flex-1 mb-10 bg-white rounded shadow lg:mb-8 dark:bg-gray-900">
-                        <div class="absolute inline-block w-4 overflow-hidden -translate-y-1/2 top-7 -left-4">
-                            <div class="hidden h-10 origin-top-right transform -rotate-45 bg-blue-600 dark:bg-blue-500 lg:block drop-shadow-lg">
-                            </div>
-                        </div>
-                        <div class="relative z-20 p-6">
-                            <div class="absolute -top-4 -left[-30px]  lg:top-0 lg:left-0 inline-block px-2 py-2.5  dark:bg-blue-500 bg-blue-600 rounded-md lg:rounded-br-md lg:rounded-tl-md">
-                                <span class="text-xs text-gray-100">2013-10-03</span>
-                            </div>
-                            <p class="mt-4 mb-2 text-xl font-bold text-gray-600 lg:mt-8 dark:text-gray-400"> Website Launched </p>
-                            <p class="text-gray-700 dark:text-gray-500"> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                <div class="relative flex justify-between">
-                    <div class="hidden py-3 w-14 md:block ">
-                        <h2 class="text-base font-medium text-gray-700 dark:text-gray-400">Step 3</h2>
-                    </div>
-                    <div class="flex flex-col items-center w-10 mr-4 md:w-24">
-                        <div>
-                            <div
-                                class="flex items-center justify-center w-10 h-10 border border-blue-500 rounded-full dark:border-blue-400">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="w-4 h-4 text-blue-500 dark:text-blue-400 bi bi-code-slash" viewBox="0 0 16 16">
-                                    <path d="M10.478 1.647a.5.5 0 1 0-.956-.294l-4 13a.5.5 0 0 0 .956.294l4-13zM4.854 4.146a.5.5 0 0 1 0 .708L1.707 8l3.147 3.146a.5.5 0 0 1-.708.708l-3.5-3.5a.5.5 0 0 1 0-.708l3.5-3.5a.5.5 0 0 1 .708 0zm6.292 0a.5.5 0 0 0 0 .708L14.293 8l-3.147 3.146a.5.5 0 0 0 .708.708l3.5-3.5a.5.5 0 0 0 0-.708l-3.5-3.5a.5.5 0 0 0-.708 0z"> </path>
-                                </svg>
-                            </div>
-                        </div>
-                        <div class="w-px h-full bg-blue-300"></div>
-                    </div>
-                    <div class="relative flex-1 mb-10 bg-white rounded shadow lg:mb-8 dark:bg-gray-900">
-                        <div class="absolute inline-block w-4 overflow-hidden -translate-y-1/2 top-7 -left-4">
-                            <div class="hidden h-10 origin-top-right transform -rotate-45 bg-blue-600 dark:bg-blue-500 lg:block drop-shadow-lg"> </div>
-                        </div>
-                        <div class="relative z-20 p-6">
-                            <div class="absolute -top-4 -left[-30px]  lg:top-0 lg:left-0 inline-block px-2 py-2.5  dark:bg-blue-500 bg-blue-600 rounded-md lg:rounded-br-md lg:rounded-tl-md">
-                                <span class="text-xs text-gray-100">2013-10-03</span>
-                            </div>
-                            <p class="mt-4 mb-2 text-xl font-bold text-gray-600 lg:mt-8 dark:text-gray-400"> Website Launched </p>
-                            <p class="text-gray-700 dark:text-gray-500"> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                <div class="relative flex justify-between">
-                    <div class="hidden py-3 w-14 md:block ">
-                        <h2 class="text-base font-medium text-gray-700 dark:text-gray-400">Step 4</h2>
-                    </div>
-                    <div class="flex flex-col items-center w-10 mr-4 md:w-24">
-                        <div>
-                            <div
-                                class="flex items-center justify-center w-10 h-10 border border-blue-500 rounded-full dark:border-blue-400">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="w-4 h-4 text-blue-500 dark:text-blue-400 bi bi-clock" viewBox="0 0 16 16">
-                                    <path d="M8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71V3.5z"> </path>
-                                    <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm7-8A7 7 0 1 1 1 8a7 7 0 0 1 14 0z"></path>
-                                </svg>
-                            </div>
-                        </div>
-                        <div class="w-px h-full bg-blue-300"></div>
-                    </div>
-                    <div class="relative flex-1 mb-10 bg-white rounded shadow lg:mb-8 dark:bg-gray-900">
-                        <div class="absolute inline-block w-4 overflow-hidden -translate-y-1/2 top-7 -left-4">
-                            <div class="hidden h-10 origin-top-right transform -rotate-45 bg-blue-600 dark:bg-blue-500 lg:block drop-shadow-lg"> </div>
-                        </div>
-                        <div class="relative z-20 p-6">
-                            <div class="absolute -top-4 -left[-30px]  lg:top-0 lg:left-0 inline-block px-2 py-2.5  dark:bg-blue-500 bg-blue-600 rounded-md lg:rounded-br-md lg:rounded-tl-md">
-                                <span class="text-xs text-gray-100">2013-10-03</span>
-                            </div>
-                            <p class="mt-4 mb-2 text-xl font-bold text-gray-600 lg:mt-8 dark:text-gray-400"> Website Launched </p>
-                            <p class="text-gray-700 dark:text-gray-500"> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
 @endsection

@@ -1,45 +1,45 @@
 @extends('back.layouts.master')
 @section('title', 'All Users')
 @section('content')
-<div class="bg-gray-100">
-    <div class="bg-white p-4 rounded-md shadow-md">
-        <h2 class="text-lg font-semibold bg-gray-700 p-4 text-gray-300"> <i class="fas fa-users text-green-500"></i> @yield('title') All Users</h2>
+<div>
+    <div class="bg-white p-2 rounded-md shadow-md">
+        <h3 class="text-lg font-semibold bg-dark p-4 text-light"> <i class="fas fa-users text-warning"></i> @yield('title')</h3>
         <!-- Filter and Search -->
-        <div class="flex items-end justify-between flex-row bg-gray-200 p-4">
-            <div class="w-3/4 mx-2">
-                <label for="search" class="block text-gray-700 font-medium mb-2"><i class="fas fa-search"></i> Search</label>
-                <input type="text" id="search" name="search"class="w-full px-4 py-2 bg-gray-100 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"placeholder="Search...">
+        <div class="d-flex justify-content-between align-items-end flex-row my-4">
+            <div class="w-75 mx-2">
+                <label for="search" class="form-label text-gray-700 font-medium mb-2"><i class="fas fa-search"></i> Search</label>
+                <input type="text" id="search" name="search"class="form-control" placeholder="Search...">
             </div>
-            <div class="mb2 mx-2">
-                <button id="addUserBtn" class="bg-green-500 text-white px-4 py-2 rounded-md hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"><i class="fas fa-plus"></i> Add User</button>
+            <div>
+                <button id="addUserBtn" class="btn btn-warning"><i class="fas fa-plus"></i> Add User</button>
             </div>
         </div>
 
         <!-- Table -->
-        <div class="overflow-x-auto">
-            <table class="table-auto w-full border-collapse">
-                <thead>
-                    <tr class="bg-gray-300 text-left">
-                        <th class="px-4 py-2">ID</th>
-                        <th class="px-4 py-2">First Name</th>
-                        <th class="px-4 py-2">Last Name</th>
-                        <th class="px-4 py-2">Email</th>
-                        <th class="px-4 py-2">Actions</th>
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead class="table-dark">
+                    <tr>
+                        <th>ID</th>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th>Email</th>
+                        <th>Actions</th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach($users as $user)
                     <tr>
-                        <td class="border px-4 py-2">{{$user->id}}</td>
-                        <td class="border px-4 py-2">{{$user->first_name}}</td>
-                        <td class="border px-4 py-2">{{$user->last_name}}</td>
-                        <td class="border px-4 py-2">{{$user->email}}</td>
-                        <td class="border px-4 py-2">
-                            <button onclick="openModalWithData('{{$user->id}}', '{{$user->first_name}}', '{{$user->last_name}}', '{{$user->email}}')" class="text-blue-500 rounded"><i class="fas fa-edit"></i> </button>  |
-                            <form action="{{route('admin.deleteUser')}}" method="post">
+                        <td>{{$user->id}}</td>
+                        <td>{{$user->first_name}}</td>
+                        <td>{{$user->last_name}}</td>
+                        <td>{{$user->email}}</td>
+                        <td>
+                            <button onclick="openModalWithData('{{$user->id}}', '{{$user->first_name}}', '{{$user->last_name}}', '{{$user->email}}')" class="btn btn-success"><i class="fas fa-edit"></i></button>
+                            <form action="{{route('admin.deleteUser')}}" method="post" class="d-inline">
                                 @csrf
                                 <input type="hidden" name="id" value="{{$user->id}}">
-                                <button onclick="return confirm('Are You sure to delete')" class="text-red-500 rounded"><i class="fas fa-trash-alt"></i> </button>
+                                <button onclick="return confirm('Are You sure to delete')" class="btn btn-danger"><i class="fas fa-trash-alt"></i></button>
                             </form>
                         </td>
                     </tr>
@@ -54,46 +54,46 @@
 </div>
 
 <!-- Modal for adding user -->
-<div id="addUserModal" class="fixed z-10 inset-0 overflow-y-auto hidden bg-gray-500 bg-opacity-75">
+<div class="modal fade" id="addUserModal" tabindex="-1">
     <!-- Modal content -->
-    <div class="flex items-center justify-center min-h-screen">
-        <div class="bg-white p-6 rounded-lg shadow-xl w-96">
-            <form id="userForm"  method="POST">
-                @csrf <!-- CSRF koruma tokeni -->
-                <input type="hidden" name="id" id="userId">
-                <div class="mb-4">
-                    <label for="first_name" class="block text-gray-700 font-medium mb-2">First Name</label>
-                    <input type="text" id="first_name" name="first_name" class="w-full px-4 py-2 bg-gray-100 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
-                </div>
-                <div class="mb-4">
-                    <label for="last_name" class="block text-gray-700 font-medium mb-2">Last Name</label>
-                    <input type="text" id="last_name" name="last_name" class="w-full px-4 py-2 bg-gray-100 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
-                </div>
-                <div class="mb-4">
-                    <label for="email" class="block text-gray-700 font-medium mb-2">Email</label>
-                    <input type="email" id="email" name="email" class="w-full px-4 py-2 bg-gray-100 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
-                </div>
-                <div class="mb-4">
-                    <label for="password" class="block text-gray-700 font-medium mb-2">Password</label>
-                    <input type="password" id="password" name="password" class="w-full px-4 py-2 bg-gray-100 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
-                </div>
-                <div class="mb-4">
-                    <label for="auth" class="block text-gray-700 font-medium mb-2">Auth</label>
-                    <select id="auth" name="auth" class="w-full px-4 py-2 bg-gray-100 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
-                        <option value="0">0</option>
-                        <option value="1">1</option>
-                    </select>
-                </div>
-                <div class="flex justify-end">
-                    <button type="submit" id="createUserBtn" class="bg-green-500 text-white px-4 py-2 rounded-md hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"></button>
-                    <button type="button" id="closeModalBtn" class="bg-gray-300 text-gray-700 px-4 py-2 rounded-md hover:bg-gray-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 ml-4">Close</button>
-                </div>
-            </form>
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-body">
+                <form id="userForm" method="POST">
+                    @csrf <!-- CSRF protection token -->
+                    <input type="hidden" name="id" id="userId">
+                    <div class="mb-4">
+                        <label for="first_name" class="form-label text-gray-700 font-medium mb-2">First Name</label>
+                        <input type="text" id="first_name" name="first_name" class="form-control">
+                    </div>
+                    <div class="mb-4">
+                        <label for="last_name" class="form-label text-gray-700 font-medium mb-2">Last Name</label>
+                        <input type="text" id="last_name" name="last_name" class="form-control">
+                    </div>
+                    <div class="mb-4">
+                        <label for="email" class="form-label text-gray-700 font-medium mb-2">Email</label>
+                        <input type="email" id="email" name="email" class="form-control">
+                    </div>
+                    <div class="mb-4">
+                        <label for="password" class="form-label text-gray-700 font-medium mb-2">Password</label>
+                        <input type="password" id="password" name="password" class="form-control">
+                    </div>
+                    <div class="mb-4">
+                        <label for="auth" class="form-label text-gray-700 font-medium mb-2">Auth</label>
+                        <select id="auth" name="auth" class="form-select">
+                            <option value="0">0</option>
+                            <option value="1">1</option>
+                        </select>
+                    </div>
+                    <div class="flex justify-end">
+                        <button type="submit" id="createUserBtn" class="btn btn-success"><i class="fas fa-plus"></i> Create User</button>
+                        <button type="button" id="closeModalBtn" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
 </div>
-
-
 
 <script>
     // Get modal element
@@ -107,40 +107,33 @@
     btn.addEventListener('click', openModal);
     // Listen for click on close button
     closeBtn.addEventListener('click', closeModal);
-    // Listen for click outside of modal
-    window.addEventListener('click', outsideClick);
-
     // Function to open modal
     function openModal() {
-        document.getElementById('userForm').action = '{{route('admin.addNewUser')}}'
+        document.getElementById('userForm').action = '{{route('admin.addNewUser')}}';
         document.getElementById('createUserBtn').innerHTML = '<i class="fas fa-plus"></i> Create User';
         document.getElementById('first_name').value = '';
         document.getElementById('last_name').value = '';
         document.getElementById('email').value = '';
         document.getElementById('password').value = '';
-        modal.style.display = 'block';
+        var myModal = new bootstrap.Modal(modal);
+        myModal.show();
     }
     // Function to close modal
     function closeModal() {
-        modal.style.display = 'none';
-    }
-    // Function to close modal if outside click
-    function outsideClick(e) {
-        if (e.target == modal) {
-            modal.style.display = 'none';
-        }
+        var myModal = new bootstrap.Modal(modal);
+        myModal.hide();
     }
 
     function openModalWithData(id, firstName, lastName, email){
-        document.getElementById('userForm').action = '{{route('admin.editUser')}}'
+        document.getElementById('userForm').action = '{{route('admin.editUser')}}';
         document.getElementById('createUserBtn').innerHTML = '<i class="fas fa-save"></i> Save';
         document.getElementById('userId').value = id;
         document.getElementById('first_name').value = firstName;
         document.getElementById('last_name').value = lastName;
         document.getElementById('email').value = email;
         document.getElementById('password').value = '';
-        modal.style.display = 'block';
+        var myModal = new bootstrap.Modal(modal);
+        myModal.show();
     }
-
 </script>
 @endsection

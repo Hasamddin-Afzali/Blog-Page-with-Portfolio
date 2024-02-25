@@ -14,7 +14,7 @@ class ContactController extends Controller
             $messages = Contact::where('isDeleted', 0)->paginate(15);
             return view('back.contacts', compact('messages'));
         }catch (\Exception $e){
-            toastr()->error('Something went wrong.');
+            toastr()->error($e->getMessage());
             return redirect()->back();
         }
     }

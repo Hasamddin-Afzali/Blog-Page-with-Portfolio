@@ -1,67 +1,124 @@
 @extends('front.layouts.master')
 @section('title', 'Home')
 @section('content')
-
-<header class="bg-cover bg-center h-screen flex items-center text-white bg-no-repeat relative"
-  style="width:100%;height:500px;background-image: url('https://mdbcdn.b-cdn.net/img/new/slides/146.webp');">
-  <div class="absolute inset-0 bg-black bg-opacity-50"></div>
-  <div class="container mx-auto text-center relative z-10">
-    <h1 class="text-5xl font-bold mb-4">Hello I'am <span class="text-red-500">YourName</span></h1>
-    <p class="text-lg mb-8">A short description or call to action.</p>
-    <a href="#"
-      class="bg-red-500 hover:bg-red-700 text-white font-bold py-3 px-6 rounded-full focus:outline-none focus:shadow-outline">Dowload
-      CV</a>
-  </div>
-</header>
-
-<!-- containr starts -->
-<div class="container mx-auto w-3/4">
-  <div class="flex flex-col md:flex-row items-center justify-between py-8 md:py-32">
-    <!-- Left Column -->
-    <div class="max-w-md mb-8 md:mb-0 md:mr-4">
-      <h2 class="text-3xl font-bold mb-4">About Me</h2>
-      <hr class="mb-4">
-      <h1 class="text-4xl font-bold mb-6">Biography</h1>
-      <p class="mb-4">Hi, I'm [Your Name]. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis dapibus felis
-        vel metus sollicitudin, eget consequat turpis efficitur.</p>
-      <p class="mb-4">I have a passion for [your interests] and a strong background in [your expertise]. With [number]
-        years of experience, I have [achievement 1, achievement 2, etc.].</p>
-      <p>Feel free to explore my journey and connect with me on [social media links].</p>
-    </div>
-    <!-- Right Column (Image) -->
-    <div class="flex-shrink-0">
-        <img src="https://mdbcdn.b-cdn.net/img/new/ecommerce/vertical/117.jpg" alt="Your Image"
-        class="w-full md:w-96 h-64 md:h-96 rounded-full object-cover">
-    </div>
-  </div>
-</div>
-
-<div class="bg-gray-100 py-10">
-  <div class="container mx-auto my-8 w-3/4">
-    <!-- title of blog starts here  -->
-    <div class="title my-10">
-      <h2 class="text-3xl font-bold mb-4">Blogs</h2>
-      <hr>
-      <h1 class="text-4xl font-bold mb-6">The Latest Blogs</h1>
-    </div>
-    <!-- title of blogs ends here -->
-    <!-- all blogs starts here -->
-
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-      <!-- Column 1 -->
-        @foreach($posts as $post)
-        <a href="{{ 'blog/'.$post->id }}" class="text-blue-500 flex">
-            <div class="bg-white p-4 rounded-3xl shadow-md hover:shadow-lg">
-                <img src="{{$post->img_path}}" alt="Image" class="w-full h-72 rounded-3xl mb-4">
-                <div class="text-xl font-bold mb-2 text-black">{{$post->title}}</div>
-                <div class="text-gray-500 text-sm mb-2">{{$post->created_at->format('F d, Y')}}</div>
-                <div class="text-blue-500 mb-2">{{$post->getRelation('category')->title}}</div>
-                <p class="text-gray-800">{!! substr($post->short_description,0,100).'... '!!} </p>
+<div class="background-image" style="background-image: url('{{ asset('img/bg.jpg') }}');" data-aos-delay="100">
+  <div class="container-md mx-auto h-100">
+    <div class="row justify-content-between py-5 ">
+      <div class="col-md-6 d-md-flex align-items-center">
+        <header class="h-auto py-5 d-flex flex-column justify-content-center text-white text-center text-md-start">
+          <h5>Hi There!</h5>
+          <h1 class="fw-bold"> I'm <span id="typewriter" class="text-warning"></span></h1>
+          <hr>
+          <p class="">Hello! I'm Hasamuddin Afzali, a passionate computer engineer, full-stack web developer, and graphic designer based in Karabuk, Turkey. With a keen eye for detail and a love for creative problem-solving, I thrive in the dynamic intersection of technology and design.</p>
+            
+            <div class="social my-4">
+              <a href="https://github.com/Hasamddin-Afzali" target="_blank" class="text-decoration-none text-reset"><i class="fab fa-github text-warning fs-2 me-4"></i></a>
+              <a href="https://www.linkedin.com/in/hasamuddin-afzali-7224b61b3/" target="_blank" class="text-decoration-none text-reset"><i class="fab fa-linkedin text-warning fs-2 me-4"></i></a>
+              <a href="https://www.instagram.com/hasam.afzali/" target="_blank" class="text-decoration-none text-reset"><i class="fab fa-instagram text-warning fs-2 me-4"></i></a>
             </div>
-          </a>
-        @endforeach
+
+            <div class="button"> <a href="{{asset('/img/cv.pdf')}}" download class="btn btn-warning">Download CV</a> </div>
+        </header>
+      </div>
+
+      <div class="col-md-4 align-self-center">
+        <img src="{{URL::asset('/img/hero-section-img.jpg')}}" class="img-fluid hero-img" alt="" data-aos="fade-right">
+      </div>
+
     </div>
-    <!-- all blogs ends here  -->
+  </div>
+
+</div>
+
+<div class="container py-5">
+  <div class="row justify-content-around align-items-center" data-aos="fade-right" data-aos-delay="100">
+    <div class="col-md-4" data-aos="fade-right">
+      <img src="{{asset('/img/about-me.jpg')}}" alt="Your Image" class="img-fluid rounded-md">
+    </div>
+    <!-- Left Column -->
+    <div class="col-md-6 mb-4 mb-md-0">
+      <h1 class=" mb-4 my-2">Who am I?</h1>
+      <hr class="mb-4">
+      <p class="mb-4">I am currently pursuing my Bachelor's degree in Computer Engineering,
+        specializing in cutting-edge
+        technologies and software development practices. Prior to this, I earned my Associate Degree in Computer
+        Programming, where I honed my skills and laid the groundwork for my journey into the world of technology.
+        Alongside my academic pursuits, I have immersed myself in the world of freelance web development and graphic
+        design. Leveraging my expertise in HTML, CSS, JavaScript, Bootstrap, jQuery, Tailwind CSS, React, C#, and
+        Laravel, I craft bespoke digital solutions that not only meet but exceed my clients' expectations.</p>
+        <div class="button">
+          <a href="{{route('portfolio')}}" class="btn btn-warning">Portfolio</a>
+        </div>
+    </div>
   </div>
 </div>
+
+<div class="bg-light py-5">
+  <div class="container my-4">
+
+    <div class="title my-5">
+      <h2 class="text-2xl font-bold mb-4 text-warning">Blogs</h2>
+      <hr>
+      <h1 class="text-4xl font-bold mb-6 text-yellow">The Latest Blogs</h1>
+    </div>
+
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+
+      @if($posts->isEmpty())
+      <div class="bg-danger text-white p-4 w-100 my-4">
+        There are no posts available. <i class="fas fa-exclamation"></i>
+      </div>
+      @else
+      @foreach($posts as $post)
+
+      <div class="col" data-aos="fade-right" data-aos-delay="100">
+          <div class="card h-100">
+            <div class="ratio ratio-16x9">
+              <img src="{{$post->img_path}}" class="card-img-top" alt="Image">
+            </div>
+            <div class="card-body">
+            <a href="{{ 'blog/'.$post->id }}" class="text-decoration-none "> <h5 class="card-title text-dark">{{$post->title}}</h5></a>
+              <p class="card-text text-secondary">{{$post->created_at->format('F d, Y')}} | {{$post->getRelation('category')->title}}</p>
+              <p class="card-text text-dark">{!! substr($post->short_description,0,130).'... '!!}</p>
+            </div>
+            <a href="{{ route('singlePost', $post->id) }}" class="bt btn-warning p-2 text-decoration-none">see more</a>
+          </div>
+      </div>
+
+      @endforeach
+      @endif
+    </div>
+  </div>
+</div>
+
+<script>
+  const words = ["Hasamuddin", "Web Developer", "Graphic Designer"];
+  let i = 0;
+  let j = 0;
+  let currentWord = "";
+  let isDeleting = false;
+
+  function type() {
+    currentWord = words[i];
+    if (isDeleting) {
+      document.getElementById("typewriter").textContent = currentWord.substring(0, j - 1);
+      j--;
+      if (j == 0) {
+        isDeleting = false;
+        i++;
+        if (i == words.length) {
+          i = 0;
+        }
+      }
+    } else {
+      document.getElementById("typewriter").textContent = currentWord.substring(0, j + 1);
+      j++;
+      if (j == currentWord.length) {
+        isDeleting = true;
+      }
+    }
+    setTimeout(type, 100);
+  }
+  type();
+</script>
 @endsection
