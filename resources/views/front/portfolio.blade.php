@@ -23,7 +23,8 @@
                 <h2 class="text-3xl">Education & Experience</h2>
                 <p class="py-4">I am currently pursuing my Bachelor's degree in Computer Engineering, specializing in
                     cutting-edge
-                    technologies and software development practices. Prior to this, I earned my Associate Degree in Computer
+                    technologies and software development practices. Prior to this, I earned my Associate Degree in
+                    Computer
                     Programming, where I honed my skills and laid the groundwork for my journey into the world of
                     technology.
 
@@ -43,7 +44,8 @@
                         <span class="text-base font-semibold">80%</span>
                     </div>
                     <div class="progress my-2">
-                        <div class="progress-bar bg-warning" role="progressbar" style="width: 80%;" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
+                        <div class="progress-bar bg-warning" role="progressbar" style="width: 80%;" aria-valuenow="80"
+                            aria-valuemin="0" aria-valuemax="100"></div>
                     </div>
                 </div>
 
@@ -53,7 +55,8 @@
                         <span class="text-base font-semibold">90%</span>
                     </div>
                     <div class="progress my-2">
-                        <div class="progress-bar bg-warning" role="progressbar" style="width: 90%;" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100"></div>
+                        <div class="progress-bar bg-warning" role="progressbar" style="width: 90%;" aria-valuenow="90"
+                            aria-valuemin="0" aria-valuemax="100"></div>
                     </div>
                 </div>
 
@@ -74,7 +77,8 @@
                         <span class="text-base font-semibold">75%</span>
                     </div>
                     <div class="progress my-2">
-                        <div class="progress-bar bg-warning" role="progressbar" style="width: 75%;" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
+                        <div class="progress-bar bg-warning" role="progressbar" style="width: 75%;" aria-valuenow="75"
+                            aria-valuemin="0" aria-valuemax="100"></div>
                     </div>
                 </div>
 
@@ -84,7 +88,8 @@
                         <span class="text-base font-semibold">60%</span>
                     </div>
                     <div class="progress my-2">
-                        <div class="progress-bar bg-warning" role="progressbar" style="width: 60%;" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
+                        <div class="progress-bar bg-warning" role="progressbar" style="width: 60%;" aria-valuenow="60"
+                            aria-valuemin="0" aria-valuemax="100"></div>
                     </div>
                 </div>
             </div>
@@ -136,12 +141,14 @@
     </div>
 </div>
 
-
-
 <div class="container py-5">
     <h2 class="text-center text-3xl font-bold mb-4">My Projects</h2>
     <hr>
     <div class="row justify-content-around">
+        @if($projects->isEmpty())
+        <div class="bg-danger text-white p-4 w-100 my-4"> <i class="fas fa-exclamation-circle"></i> No Project Found <i
+                class="fas fa-exclamation"></i> </div>
+        @else
         @foreach($projects as $project)
         <div class="col-md-5 mb-4 bg-light p-4 mx-2 shadow-sm" data-aos="fade-left" data-aos-delay="200">
             <h3 class="text-2xl">{{$project->title}}</h3>
@@ -149,6 +156,7 @@
             <a href="{{$project->link}}" class="btn btn-warning text-white">Learn More</a>
         </div>
         @endforeach
+        @endif
     </div>
 </div>
 

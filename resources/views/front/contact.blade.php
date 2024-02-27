@@ -9,14 +9,14 @@
 </header>
 
 <div class="bg-light py-5">
-    <div class="container-lg mx-auto">
+    <div class="container-md mx-auto">
         <section class="py-5 d-flex flex-column flex-md-row align-items-center justify-content-between flex-wrap">
 
             <div class="col-md-4 mx-5 mb-4 mb-md-0">
                 <img src="{{asset('/img/contact.png')}}" class="w-100" alt="">
             </div>
 
-            <div class="col-md-6 col-10 p-4 mx-5">
+            <div class="col-md-6 col-10 p-4 ">
 
                 <h2 class="text-700 mb-4">Contact Me</h2>
 
