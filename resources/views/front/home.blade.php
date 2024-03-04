@@ -63,8 +63,8 @@
     </div>
 
     <div class="row row-cols-1 row-cols-md-3 g-4">
-
-      @if(empty($posts))
+      
+      @if(count($posts) == 0)
       <div class="bg-danger text-white p-4 w-100 my-4">
         There are no posts available. <i class="fas fa-exclamation"></i>
       </div>
