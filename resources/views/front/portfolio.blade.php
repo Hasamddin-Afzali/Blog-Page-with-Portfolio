@@ -1,5 +1,5 @@
 @extends('front.layouts.master')
-@section('title', 'Home')
+@section('title', 'Portfolio')
 @section('content')
 <!-- header starts here  -->
 <header class="bg-cover bg-center h-screen d-flex align-items-center text-white bg-no-repeat position-"
