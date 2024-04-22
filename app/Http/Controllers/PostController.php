@@ -40,37 +40,38 @@ class PostController extends Controller
 
 
     public function addNewPost(Request $request)
-    {
-        $validation = $request->validate([
-            'title' => 'required',
-            'category' => 'required',
-            'image' => 'required|mimes:jpeg,jpg,png,gif',
-            'shortDescription' => 'required',
-            'postContent' => 'required'
+{
+    $validation = $request->validate([
+        'title' => 'required',
+        'category' => 'required',
+        'image' => 'required|mimes:jpeg,jpg,png,gif',
+        'shortDescription' => 'required',
+        'postContent' => 'required'
+    ]);
+    try {
+        $directoryPath = '/public/img/postHeaders';
+        $image = $request->file('image');
+
+        if (!Storage::exists($directoryPath))
+            Storage::makeDirectory($directoryPath);
+        $imagePath = '/storage' . substr(Storage::putFile($directoryPath, $image), 6); // 6: public => storage
+
+        Post::create([
+            'title' => $request->title,
+            'category' => $request->category,
+            'img_path' => $imagePath,
+            'short_description' => addslashes($request->shortDescription),
+            'body' => $request->postContent,
+            'created_by' => Auth::user()->id,
+            'created_at' => now()
         ]);
-        try {
-            $directoryPath = '/public/img/postHeaders';
-            $image = $request->file('image');
-
-            if(!Storage::exists($directoryPath))
-                Storage::makeDirectory($directoryPath);
-            $imagePath = '/storage'.substr(Storage::putFile($directoryPath, $image),6);// 6: public => storage
-
-            Post::create([
-                'title'=>$request->title,
-                'category'=>$request->category,
-                'img_path'=> $imagePath,
-                'short_description'=>$request->shortDescription,
-                'body'=>$request->postContent,
-                'created_by'=>Auth::user()->id,
-                'created_at'=>now()
-            ]);
-            toastr()->success('Blog post has been shared successfully.');
-        }catch (\Exception $e){
-            toastr()->error('Something went wrong! '.$e->getMessage());
-        }
-        return redirect()->back();
+        toastr()->success('Blog post has been shared successfully.');
+    } catch (\Exception $e) {
+        toastr()->error('Something went wrong! ' . $e->getMessage());
     }
+    return redirect()->back();
+}
+
 
     public function editPostPage(Request $request)
     {
