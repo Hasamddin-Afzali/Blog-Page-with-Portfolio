@@ -13,6 +13,9 @@
     <link href="{{asset('bootstrap/css/aos.css')}}" rel="stylesheet">
     <link rel="icon" type="image/png" href="/img/icon.png">
     <title>@yield('title', 'Hasamuddin.com')</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Sedan:ital@0;1&display=swap" rel="stylesheet">
 </head>
 <body>
 
